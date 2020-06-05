@@ -10,43 +10,41 @@
 		<title>An Exercise in Frontend</title>
 	</head>
 	<body>
-		<header>
-			<nav>
-				<ul class="nav-bar">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="#">Projects</a></li>
-					<li><a href="other.html">Other Works</a></li>
-					<li><a href="https://github.com/skeola/" target="_blank">GitHub</a></li>
-				</ul>
-			</nav>
-		</header>
-		
 		<main>
-			<h1>An Exercise in Frontend</h1>
-			
-			<h2>Recent Posts:</h2>
-			<div class="colposts">
-				<div class="posts">
-					<p>First post! This is my first attempt at making my own website from scratch
-					and I've got to say that it's harder than I expected. This first post is
-					mainly so I've got something to use to test out the spacing. Hopefully the
-					next one is a bit more informative!</p>
-				</div>
-				<div class="posts">
-					<p>Second post! Hooray! List of things to add:</p>
-					<ul>
-						<li> Hosting and DB
-						<li> Better formatting
-						<li> Actual links in the navbar
-						<li> Sleep
-				</div>
-			</div>
+      <div class="flex-container">
+          <div class="left-col">
+            <div>
+              <img src="images/me.jpg" alt="me.jpg" class="self-pic"/>
+              <p class="name" >Shannon<br/>Kaleookalani<br/>Keola</p>
+              <p>skkeola@gmail.com</p>
+              <p>B.S. Computer Science<br/>Portland State University<br/>June 2020</p>
+              <p class="text-padding">Interested/specialized in machine learning, 
+                artificial intelligence, and back-end programming.</p>
+              <p><a href="https://github.com/skeola" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="link"><img src="images/GitHub-Mark-Light-32px.png" alt="GitHub" class="logo"></a>   
+                  <a href="https://www.linkedin.com/in/shannon-keola" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="link"><img src="images/LI-In-Bug.png" alt="LinkedIn" class="logo"></a></p>
+            </div>
+            <div>
+              <p>"I ka w&#257; ma mua, I ka w&#257; ma hope."</p>
+              <p>Use the past to understand the future.</p>
+            </div>
+          </div>
+          <div class="right-col">
+            <div class="big-text-padding">
+              <p class="name"><br/>An Exercise in Frontend<br/><br/></p>
+              <p class="main-text">This website is intended to be both a portfolio and an evolving foray into 
+                learning more frontend skills including JS, HTML, and CSS. At the moment, this website is fairly 
+                bare but I will be expanding and improving it over time. </p>
+            </div>
+          </div>
+      </div>
 		</main>
 		
-		<footer>
-			<p>Created by Shannon Keola. Inspired by a Mozilla tutorial.</p>
-		</footer>
 		<!--<script src="script.js"></script>-->
 	</body>
 </html>

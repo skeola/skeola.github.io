@@ -1,77 +1,79 @@
-html {
-  background-color: #C1D2DC;
-  font-size: 20px;
-  font-family: Verdana, sans-serif;
+body {
+  padding: 0;
+  margin: 0;
 }
 
 main {
-	padding-top: 65px;
+  text-align: center;
 }
 
-h1 {
-	width = 100;
-	text-align: center;
-	line-height: 100px;
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
 }
 
-/*2 COLUMN BLOGPOSTS?*/
-.colposts {
-	display: flex;
-	flex-wrap: wrap;
+.left-col {
+  flex: 1;
+  background-color: #c0B283;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.posts {
-	background: #9BB6C6;
-	border: 2px solid #314A58;
-	margin: 15px;
-	padding: 10px;
-	flex: 200px;
+.right-col {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../images/intro.jpg");
+  background-color: #f4f4f4;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-/* NAVIGATION BAR */
-.nav-bar{
-	background: #7497AC;
-	border: 1px solid black;
-	display = flex;
-	position: fixed;
-	width: 100%;
-	top: 0;
-	padding: 0;
-	margin: 0px 0px 0px -8px;
-	list-style-type: none;
-	background-color: #557E97
+.self-pic {
+  margin-top: 1vh;
+  max-width: 95%;
+  border-radius: 50%;
+  border-color: #373737;
+  padding: 3px;
+  border-width: 3px;
+  border-style: solid;
 }
 
-.nav-bar li{
-	margin-left: 0;
-	float: left;
+p {
+  color: #373737;
 }
 
-.nav-bar li a{
-	display: block;
-	text-align: center;
-	padding: 20px 20px;
-	text-decoration: none;
-	color: black;
+a {
+  color: #373737;
 }
 
-.nav-bar li a:visited{
-	color: black;
+.text-padding {
+  margin: 1vw;
 }
 
-.nav-bar li a:hover{
-	background-color: #3B6984;
+.big-text-padding {
+  margin: 10vw;
 }
 
-.center {
-	display: block;
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
+a:link {
+  color:blue;
 }
 
-footer{
-	font-size: 12px;
-	bottom: 0;
-	text-align: center;
+a:visited {
+  color: blue;
+}
+
+.name {
+  font-size: 3vh;
+}
+
+.main-text {
+  font-size: 18px;
+}
+
+.logo {
+  margin: 4px;
+  height: 32px;
 }
