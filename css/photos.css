@@ -90,3 +90,23 @@ a:visited {
   height: 200px;
   margin: 20px;
 }
+
+.modal {
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.focus-image {
+  display: block;
+  margin: auto;
+  /* padding: 20px; */
+  border: 10px solid white;
+  max-width: 90%;
+  max-height: 90%;
+}

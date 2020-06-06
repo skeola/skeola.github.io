@@ -22,7 +22,6 @@
                 artificial intelligence, and back-end programming.</p>
               <p>
                 <a href="index.html"
-                    target="_blank"
                     rel="noopener noreferrer"
                     class="link"><img src="images/home.png" alt="Home" class="logo"></a>
                 <a href="https://github.com/skeola" 
@@ -36,7 +35,6 @@
             </div>
             <div>
                 <a href="photos.html"
-                    target="_blank"
                     rel="noopener noreferrer"
                     class="link">Photos</a>
             </div>
@@ -45,15 +43,21 @@
               <p>Use the past to understand the future.</p>
             </div>
           </div>
-          <div class="right-col">
-            <p class="name">Ms. Madio's Magical Motography</p>
-            <p>My partner enjoys taking photos so I decided to host some of them here!</p>
-            <div id="photos" class="photos">
+          <div class="right-col" id="right-col">
+            <div>
+              <p class="name">Ms. Madio's Magical Motography</p>
+              <p>My partner enjoys taking photos so I decided to host some of them here!</p>
+              <div id="photos" class="photos">
+              </div>
+            </div>
+            <div class="modal" id="modal">
+              <img src="" id="focus-image" class="focus-image">
+              <input type="button" value="Close" onclick="document.getElementById('modal').style.display='none'">
             </div>
           </div>
       </div>
 		</main>
 		
-		<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 	</body>
 </html>
