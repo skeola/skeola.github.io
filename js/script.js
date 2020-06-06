@@ -1,7 +1,7 @@
 // Grabs all photos and adds them to the photo div
 let photos = document.getElementById("photos");
 
-const prefix = "photos/img_";
+const prefix = "photos/img-";
 let imgs = new Array();
 for(i=1; i<=33; i++){
   let img = document.createElement("img");
