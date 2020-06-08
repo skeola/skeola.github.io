@@ -29,6 +29,8 @@ main {
   background-color: #f4f4f4;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .self-pic {
@@ -102,4 +104,56 @@ a {
 
 .project {
   border-top: 4px dotted #373737;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name {
+  font-size: 24px;
+}
+
+.project-info {
+  display: flex;
+}
+
+.info {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #373737;
+  margin: 20px;
+}
+
+.details {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-text {
+  font-size: 18px;
+  text-align: left;
+}
+
+.screenshot {
+  max-width: 100%;
+  height: auto;
+}
+
+.features {
+  margin: 20px;
+  display: flex;
+}
+
+.table {
+  width: 80%;
+  border: 1px solid black;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+th {
+  font-size: 20px;
 }
