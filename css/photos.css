@@ -48,6 +48,7 @@ p {
 
 a {
   color: #373737;
+  text-decoration: none;
 }
 
 .text-padding {
@@ -58,20 +59,32 @@ a {
   margin: 10vw;
 }
 
-a:link {
-  color:blue;
+.title {
+  font-size: 36px;
 }
 
-a:visited {
-  color: blue;
+.categories {
+  display: flex;
 }
 
-.name {
-  font-size: 3vh;
+.spacer {
+  flex: 1;
 }
 
-.main-text {
+.alt-links {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  /* flex-grow: 2; */
+}
+
+.category {
+  border: 1px solid #373737;
+  padding: 5px;
   font-size: 18px;
+}
+.category:hover {
+  background-color: #a7996a;
 }
 
 .logo {

@@ -26,7 +26,6 @@ main {
   flex: 4;
   display: flex;
   flex-direction: column;
-  background-image: url(../images/intro.jpg);
   background-color: #f4f4f4;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -59,11 +58,9 @@ a {
   margin: 10vw;
 }
 
-
 .categories {
   display: flex;
 }
-
 
 .spacer {
   flex: 1;
@@ -96,4 +93,13 @@ a {
 .logo {
   margin: 4px;
   height: 32px;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  border-top: 4px dotted #373737;
 }
