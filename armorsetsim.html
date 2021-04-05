@@ -60,7 +60,22 @@
           <div class="right-col">
             <div class="header-section">
               <div class="option-section">
-                <p class="main-text">Options</p>
+                <p class="main-text" style="text-decoration: underline;">Options</p>
+                <div class="options">
+                  <div>
+                    <input type="checkbox" id="hr-only" name="options" checked>
+                    <label for="hr-only">High-Rank Only</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="option2" name="options" checked>
+                    <label for="option2">These do nothing rn</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" id="option3" name="options" checked>
+                    <label for="option3">Option 3</label>
+                  </div>
+                  <button type="button" onclick="search()">Search</button>
+                </div>
               </div>
               <div class="title-section">
                 <p class="title">MH:Rise Armor Set Simulator</p>
@@ -73,17 +88,10 @@
                 <div class="search-bar">
                   <select name="skills" id="skill-select">
                     <option value="">--choose a skill--</option>
-                    <option value="razor-sharp">Razor Sharp</option>
-                    <option value="agitator">Agitator</option>
-                    <option value="heroics">Heroics</option>
-                    <option value="horn-maestro">Horn Maestro</option>
-                    <option value="rec-speed">Recovery Speed</option>
-                    <option value="rec-up">Recovery Up</option>
                   </select>
                   <button type="button" onclick="addSkill()">Add</button>
                 </div>
                 <div class="selected-skills" id="selected-skills">
-
                 </div>
               </div>
               <div class="results-section">
@@ -107,7 +115,6 @@
           </div>
       </div>
 		</main>
-    <script type="text/javascript" src="js/skills.json"></script> 
 		<script type="text/javascript" src="js/armorsetsim.js"></script>
 	</body>
 </html>

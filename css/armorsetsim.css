@@ -95,6 +95,11 @@ a {
   margin: 10px;
 }
 
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
 .title-section {
   flex: 5;
 }
@@ -153,5 +158,12 @@ a {
 .sim-col {
   flex: 1 1 auto;
   margin: 0px;
-  /* border: 3px solid #373737; */
+}
+
+.selected-skill {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2px;
+  align-items: center;
 }

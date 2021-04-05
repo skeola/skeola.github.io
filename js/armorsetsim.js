@@ -2,28 +2,29 @@
 let selectedSkills = new Set();
 loadArmorSkills();
 
+async function loadArmorSkills(){
+  fetch('https://skeola.github.io/js/skills.json')
+  .then(response => response.json())
+  .then(data => setArmorSkillDropdown(data));
+}
 
 function addSkill() {
   let select = document.getElementById("skill-select");
-  let newSkills = [];
-  let options = select && select.options;  
+  let options = select.options;  
   let opt;
-  for(let i=0, iLen=options.length; i<iLen; i++){
+  for(let i=1; i<options.length; i++){
     opt = options[i];
     if(opt.selected) {
-      console.log(opt.text)
-      newSkills.push(opt.text);
+      let newSkill = {name: opt.innerText, current: 0, max: opt.value};
+      selectedSkills.add(newSkill);
+      updateSkillDisplay(opt.innerText, opt.value);
+      break;
     }
   }
-
-  for(skill of newSkills) {
-    console.log(skill);
-    selectedSkills.add(skill);
-  }
-  updateSkillDisplay();
 };
 
-function updateSkillDisplay() {
+// This version removes all elements and updates them
+function updateSkillDisplay_Old() {
   let selected = document.getElementById("selected-skills");
   while(selected.lastElementChild){
     selected.removeChild(selected.lastElementChild)
@@ -38,8 +39,45 @@ function updateSkillDisplay() {
   }
 }
 
-function loadArmorSkills(){
-  fetch('https://skeola.github.io/js/skills.json')
-  .then(response => response.json())
-  .then(data => console.log(data));
+// This version simply adds the new skill to the bottom of the list
+function updateSkillDisplay(name, value) {
+  let selected = document.getElementById("selected-skills");
+
+  let newSkill = document.createElement("div");
+  newSkill.className = "selected-skill";
+  let newSkillText = document.createElement("p");
+  newSkillText.innerText = name;
+  let newSkillLevel = document.createElement("select");
+  createLevelRange(newSkillLevel, value)
+  newSkill.appendChild(newSkillText);
+  newSkill.appendChild(newSkillLevel);
+  selected.appendChild(newSkill);
+}
+
+function setArmorSkillDropdown(data){
+  let dropdown = document.getElementById("skill-select");
+  for(let sk of Object.keys(data).sort()){
+    let newSkill = document.createElement("option");
+    newSkill.innerText = sk;
+    newSkill.value = data[sk];
+    dropdown.appendChild(newSkill);
+  }
+}
+
+function createLevelRange(elem, max){
+  for(let i=0;i<=max; i++){
+    let newLevel = document.createElement("option");
+    newLevel.innerText = i;
+    newLevel.value = i;
+    elem.appendChild(newLevel);
+  }
+}
+
+function search(){
+  console.log(selectedSkills)
+}
+
+function collectLevels(){
+  let selectedSkills = document.getElementById("selected-skills");
+  
 }
