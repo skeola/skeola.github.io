@@ -6,7 +6,7 @@
 		<meta name="description" content="A personal website to host/assemble all
 			of my public info and personal projects and act as a digital resume.">
 		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="css/armorsetsim.css">
 		<title>An Exercise in Frontend</title>
 	</head>
 	<body>
@@ -58,16 +58,56 @@
           </div>
         </div>
           <div class="right-col">
-            <div class="big-text-padding">
-              <p class="title">An Exercise in Frontend<br/><br/></p>
-              <p class="main-text">This website is intended to be both a portfolio and an evolving foray into 
-                learning more frontend skills including JS, HTML, and CSS. At the moment, this website is fairly 
-                bare but I will be expanding and improving it over time. </p>
+            <div class="header-section">
+              <div class="option-section">
+                <p class="main-text">Options</p>
+              </div>
+              <div class="title-section">
+                <p class="title">MH:Rise Armor Set Simulator</p>
+                <!-- <p class="title-sub">Calculate the perfect set for all your skill set needs!</p> -->
+              </div>
+            </div>
+            <div class="simulator">
+              <div class="search-section">
+                <p class="search-header">Skills</p>
+                <div class="search-bar">
+                  <select name="skills" id="skill-select">
+                    <option value="">--choose a skill--</option>
+                    <option value="razor-sharp">Razor Sharp</option>
+                    <option value="agitator">Agitator</option>
+                    <option value="heroics">Heroics</option>
+                    <option value="horn-maestro">Horn Maestro</option>
+                    <option value="rec-speed">Recovery Speed</option>
+                    <option value="rec-up">Recovery Up</option>
+                  </select>
+                  <button type="button" onclick="addSkill()">Add</button>
+                </div>
+                <div class="selected-skills" id="selected-skills">
+
+                </div>
+              </div>
+              <div class="results-section">
+                <div class="sim-col">
+                  <p class="search-header">Head</p>
+                </div>
+                <div class="sim-col">
+                  <p class="search-header">Chest</p>
+                </div>
+                <div class="sim-col">
+                  <p class="search-header">Arms</p>
+                </div>
+                <div class="sim-col">
+                  <p class="search-header">Waist</p>
+                </div>
+                <div class="sim-col">
+                  <p class="search-header">Legs</p>
+                </div>
+              </div>
             </div>
           </div>
       </div>
 		</main>
-		
-		<!--<script src="script.js"></script>-->
+    <script type="text/javascript" src="js/skills.json"></script> 
+		<script type="text/javascript" src="js/armorsetsim.js"></script>
 	</body>
 </html>
