@@ -1,0 +1,157 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.left-col {
+  flex: 1;
+  background-color: #c0B283;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.right-col {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  overflow-x: auto;
+  overflow-y: scroll;
+}
+
+.self-pic {
+  margin-top: 2vh;
+  max-width: 95%;
+  border-radius: 50%;
+  border-color: #373737;
+  padding: 3px;
+  border-width: 3px;
+  border-style: solid;
+}
+
+p {
+  color: #373737;
+}
+
+a {
+  color: #373737;
+  text-decoration: none;
+}
+
+.text-padding {
+  margin: 1vw;
+}
+
+.big-text-padding {
+  margin: 10vw;
+}
+
+.categories {
+  display: flex;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.alt-links {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  /* flex-grow: 2; */
+}
+
+.category {
+  border: 1px solid #373737;
+  padding: 5px;
+  font-size: 18px;
+}
+.category:hover {
+  background-color: #a7996a;
+}
+
+.header-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.option-section {
+  flex: 1;
+  border: 3px solid black;
+  margin: 10px;
+}
+
+.title-section {
+  flex: 5;
+}
+
+.title {
+  font-size: 36px;
+}
+
+.title-sub {
+  font-size: 20px;
+}
+
+.main-text {
+  font-size: 18px;
+}
+
+.logo {
+  margin: 4px;
+  height: 32px;
+}
+
+.simulator {
+  flex: 1;
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  border: 3px solid black;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.search-section {
+  flex: 1;
+  border-right: 2px solid black;
+  font-size: 18px;
+}
+
+.results-section {
+  flex: 5;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+}
+
+.search-header {
+  vertical-align: middle;
+  border-bottom: 2px solid black;
+  font-size: 18px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sim-col {
+  flex: 1 1 auto;
+  margin: 0px;
+  /* border: 3px solid #373737; */
+}
