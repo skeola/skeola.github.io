@@ -1,320 +1,81 @@
 {
-  "data": [
-    {
-      "name": "Ammo Up",
-      "cost": 3
-    },
-    {
-      "name": "Offensive Guard",
-      "cost": 3
-    },
-    {
-      "name": "Mushroomancer",
-      "cost": 3
-    },
-    {
-      "name": "Critical Draw",
-      "cost": 3
-    },
-    {
-      "name": "Earplugs",
-      "cost": 3
-    },
-    {
-      "name": "Aim Booster",
-      "cost": 2
-    },
-    {
-      "name": "Critical Element",
-      "cost": 2
-    },
-    {
-      "name": "Artillery",
-      "cost": 2
-    },
-    {
-      "name": "Marathon Runner",
-      "cost": 2
-    },
-    {
-      "name": "Focus",
-      "cost": 2
-    },
-    {
-      "name": "Mind's Eye",
-      "cost": 2
-    },
-    {
-      "name": "Heroics",
-      "cost": 2
-    },
-    {
-      "name": "Special Ammo Boost",
-      "cost": 2
-    },
-    {
-      "name": "Load Shells",
-      "cost": 2
-    },
-    {
-      "name": "Guard Up",
-      "cost": 2
-    },
-    {
-      "name": "Guard",
-      "cost": 2
-    },
-    {
-      "name": "Stamina Surge",
-      "cost": 2
-    },
-    {
-      "name": "Power Prolonger",
-      "cost": 2
-    },
-    {
-      "name": "Maximum Might",
-      "cost": 2
-    },
-    {
-      "name": "Attack Boost",
-      "cost": 2
-    },
-    {
-      "name": "Critical Eye",
-      "cost": 2
-    },
-    {
-      "name": "Rapid Morph",
-      "cost": 2
-    },
-    {
-      "name": "Recoil Down",
-      "cost": 1
-    },
-    {
-      "name": "Bludgeoner",
-      "cost": 2
-    },
-    {
-      "name": "Reload Speed",
-      "cost": 1
-    },
-    {
-      "name": "Stun Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Tremor Resistance",
-      "cost": 2
-    },
-    {
-      "name": "Counterstrike",
-      "cost": 2
-    },
-    {
-      "name": "Bubbly Dance",
-      "cost": 2
-    },
-    {
-      "name": "Steadiness",
-      "cost": 1
-    },
-    {
-      "name": "Punishing Draw",
-      "cost": 2
-    },
-    {
-      "name": "Evade Extender",
-      "cost": 2
-    },
-    {
-      "name": "Evade Window",
-      "cost": 2
-    },
-    {
-      "name": "Flinch Free",
-      "cost": 1
-    },
-    {
-      "name": "Quick Sheath",
-      "cost": 2
-    },
-    {
-      "name": "Windproof",
-      "cost": 1
-    },
-    {
-      "name": "Slugger",
-      "cost": 2
-    },
-    {
-      "name": "Wide-Range",
-      "cost": 2
-    },
-    {
-      "name": "Partbreaker",
-      "cost": 2
-    },
-    {
-      "name": "Blight Resistance",
-      "cost": 2
-    },
-    {
-      "name": "Speed Eating",
-      "cost": 2
-    },
-    {
-      "name": "Divine Blessing",
-      "cost": 2
-    },
-    {
-      "name": "Wall Runner",
-      "cost": 2
-    },
-    {
-      "name": "Wirebug Whisperer",
-      "cost": 2
-    },
-    {
-      "name": "Speed Sharpening",
-      "cost": 1
-    },
-    {
-      "name": "Item Prolonger",
-      "cost": 2
-    },
-    {
-      "name": "Recovery Speed",
-      "cost": 1
-    },
-    {
-      "name": "Recovery Up",
-      "cost": 2
-    },
-    {
-      "name": "Horn Maestro",
-      "cost": 1
-    },
-    {
-      "name": "Stamina Thief",
-      "cost": 1
-    },
-    {
-      "name": "Constitution",
-      "cost": 2
-    },
-    {
-      "name": "Poison Attack",
-      "cost": 1
-    },
-    {
-      "name": "Affinity Sliding",
-      "cost": 1
-    },
-    {
-      "name": "Bombardier",
-      "cost": 1
-    },
-    {
-      "name": "Fire Attack",
-      "cost": 1
-    },
-    {
-      "name": "Water Attack",
-      "cost": 1
-    },
-    {
-      "name": "Thunder Attack",
-      "cost": 1
-    },
-    {
-      "name": "Ice Attack",
-      "cost": 1
-    },
-    {
-      "name": "Dragon Attack",
-      "cost": 1
-    },
-    {
-      "name": "Defense Boost",
-      "cost": 1
-    },
-    {
-      "name": "Carving Pro",
-      "cost": 1
-    },
-    {
-      "name": "Master Mounter",
-      "cost": 1
-    },
-    {
-      "name": "Hunger Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Free Meal",
-      "cost": 1
-    },
-    {
-      "name": "Muck Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Diversion",
-      "cost": 1
-    },
-    {
-      "name": "Leap of Faith",
-      "cost": 1
-    },
-    {
-      "name": "Fortify",
-      "cost": 1
-    },
-    {
-      "name": "Geologist",
-      "cost": 1
-    },
-    {
-      "name": "Botanist",
-      "cost": 1
-    },
-    {
-      "name": "Blast Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Sleep Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Paralysis Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Poison Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Fire Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Water Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Thunder Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Ice Resistance",
-      "cost": 1
-    },
-    {
-      "name": "Dragon Resistance",
-      "cost": 1
-    }
-  ]
+  "Ammo Up": 3,
+  "Offensive Guard": 3,
+  "Mushroomancer": 3,
+  "Critical Draw": 3,
+  "Earplugs": 3,
+  "Aim Booster": 2,
+  "Critical Element": 2,
+  "Artillery": 2,
+  "Marathon Runner": 2,
+  "Focus": 2,
+  "Mind's Eye": 2,
+  "Heroics": 2,
+  "Special Ammo Boost": 2,
+  "Load Shells": 2,
+  "Guard Up": 2,
+  "Guard": 2,
+  "Stamina Surge": 2,
+  "Power Prolonger": 2,
+  "Maximum Might": 2,
+  "Attack Boost": 2,
+  "Critical Eye": 2,
+  "Rapid Morph": 2,
+  "Recoil Down": 1,
+  "Bludgeoner": 2,
+  "Reload Speed": 1,
+  "Stun Resistance": 1,
+  "Tremor Resistance": 2,
+  "Counterstrike": 2,
+  "Bubbly Dance": 2,
+  "Steadiness": 1,
+  "Punishing Draw": 2,
+  "Evade Extender": 2,
+  "Evade Window": 2,
+  "Flinch Free": 1,
+  "Quick Sheath": 2,
+  "Windproof": 1,
+  "Slugger": 2,
+  "Wide-Range": 2,
+  "Partbreaker": 2,
+  "Blight Resistance": 2,
+  "Speed Eating": 2,
+  "Divine Blessing": 2,
+  "Wall Runner": 2,
+  "Wirebug Whisperer": 2,
+  "Speed Sharpening": 1,
+  "Item Prolonger": 2,
+  "Recovery Speed": 1,
+  "Recovery Up": 2,
+  "Horn Maestro": 1,
+  "Stamina Thief": 1,
+  "Constitution": 2,
+  "Poison Attack": 1,
+  "Affinity Sliding": 1,
+  "Bombardier": 1,
+  "Fire Attack": 1,
+  "Water Attack": 1,
+  "Thunder Attack": 1,
+  "Ice Attack": 1,
+  "Dragon Attack": 1,
+  "Defense Boost": 1,
+  "Carving Pro": 1,
+  "Master Mounter": 1,
+  "Hunger Resistance": 1,
+  "Free Meal": 1,
+  "Muck Resistance": 1,
+  "Diversion": 1,
+  "Leap of Faith": 1,
+  "Fortify": 1,
+  "Geologist": 1,
+  "Botanist": 1,
+  "Blast Resistance": 1,
+  "Sleep Resistance": 1,
+  "Paralysis Resistance": 1,
+  "Poison Resistance": 1,
+  "Fire Resistance": 1,
+  "Water Resistance": 1,
+  "Thunder Resistance": 1,
+  "Ice Resistance": 1,
+  "Dragon Resistance": 1
 }

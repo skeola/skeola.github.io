@@ -12,5 +12,5 @@ for line in f:
 
 print(skills)
 with open("js/skills.json", "w") as f_out:
-  output = json.dumps(skills)
+  output = json.dumps(skills, indent=2)
   f_out.write(output)

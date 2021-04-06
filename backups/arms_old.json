@@ -1,0 +1,932 @@
+{
+  "data": [
+    {
+      "name": "Kamura",
+      "skills": [
+        {
+          "name": "Critical Eye",
+          "level": 2
+        },
+        {
+          "name": "Heroics",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 30
+    },
+    {
+      "name": "Leather",
+      "skills": [
+        {
+          "name": "Geologist",
+          "level": 1
+        },
+        {
+          "name": "Special Ammo Boost",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 30
+    },
+    {
+      "name": "Chainmail",
+      "skills": [
+        {
+          "name": "Botanist",
+          "level": 1
+        },
+        {
+          "name": "Defense Boost",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 32
+    },
+    {
+      "name": "Hunter",
+      "skills": [
+        {
+          "name": "Quick Sheath",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 32
+    },
+    {
+      "name": "Alloy",
+      "skills": [
+        {
+          "name": "Water Attack",
+          "level": 1
+        },
+        {
+          "name": "Critical Eye",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 32
+    },
+    {
+      "name": "Bone",
+      "skills": [
+        {
+          "name": "Muck Resistance",
+          "level": 1
+        },
+        {
+          "name": "Stamina Thief",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 32
+    },
+    {
+      "name": "Skalda",
+      "skills": [
+        {
+          "name": "Latent Power",
+          "level": 1
+        },
+        {
+          "name": "Poison Resistance",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 32
+    },
+    {
+      "name": "Bnahabra",
+      "skills": [
+        {
+          "name": "Poison Attack",
+          "level": 2
+        },
+        {
+          "name": "Evade Window",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 34
+    },
+    {
+      "name": "Izuchi",
+      "skills": [
+        {
+          "name": "Constitution",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 36
+    },
+    {
+      "name": "Baggi",
+      "skills": [
+        {
+          "name": "Sleep Resistance",
+          "level": 2
+        },
+        {
+          "name": "Ice Attack",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 36
+    },
+    {
+      "name": "Kulu",
+      "skills": [
+        {
+          "name": "Slugger",
+          "level": 1
+        },
+        {
+          "name": "Stamina Thief",
+          "level": 2
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 38
+    },
+    {
+      "name": "Arzuros",
+      "skills": [
+        {
+          "name": "Counterstrike",
+          "level": 1
+        },
+        {
+          "name": "Defense Boost",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 36
+    },
+    {
+      "name": "Lagombi",
+      "skills": [
+        {
+          "name": "Critical Eye",
+          "level": 2
+        },
+        {
+          "name": "Ice Attack",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2,
+        1
+      ],
+      "defense": 36
+    },
+    {
+      "name": "Aknosom",
+      "skills": [
+        {
+          "name": "Peak Performance",
+          "level": 1
+        },
+        {
+          "name": "Fire Attack",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 38
+    },
+    {
+      "name": "Khezu",
+      "skills": [
+        {
+          "name": "Wall Runner",
+          "level": 1
+        },
+        {
+          "name": "Recovery Speed",
+          "level": 1
+        },
+        {
+          "name": "Thunder Attack",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 38
+    },
+    {
+      "name": "Tetranadon",
+      "skills": [
+        {
+          "name": "Heroics",
+          "level": 1
+        },
+        {
+          "name": "Special Ammo Boost",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 40
+    },
+    {
+      "name": "Ingot",
+      "skills": [
+        {
+          "name": "Thunder Attack",
+          "level": 3
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 40
+    },
+    {
+      "name": "Edel",
+      "skills": [
+        {
+          "name": "Capture Master",
+          "level": 1
+        }
+      ],
+      "slots": [],
+      "defense": 40
+    },
+    {
+      "name": "Volvidon",
+      "skills": [
+        {
+          "name": "Evade Extender",
+          "level": 1
+        },
+        {
+          "name": "Paralysis Attack",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1,
+        1
+      ],
+      "defense": 50
+    },
+    {
+      "name": "Ludroth",
+      "skills": [
+        {
+          "name": "Marathon Runner",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2,
+        1,
+        1
+      ],
+      "defense": 48
+    },
+    {
+      "name": "Barroth",
+      "skills": [
+        {
+          "name": "Attack Boost",
+          "level": 2
+        },
+        {
+          "name": "Affinity Sliding",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 50
+    },
+    {
+      "name": "Bishaten",
+      "skills": [
+        {
+          "name": "Item Prolonger",
+          "level": 1
+        },
+        {
+          "name": "Stun Resistance",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Pukei",
+      "skills": [
+        {
+          "name": "Spare Shot",
+          "level": 1
+        },
+        {
+          "name": "Aim Booster",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 50
+    },
+    {
+      "name": "Jyura",
+      "skills": [
+        {
+          "name": "Offensive Guard",
+          "level": 1
+        },
+        {
+          "name": "Evade Extender",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3,
+        2,
+        1
+      ],
+      "defense": 48
+    },
+    {
+      "name": "Basarios",
+      "skills": [
+        {
+          "name": "Guard",
+          "level": 2
+        },
+        {
+          "name": "Speed Sharpening",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Rathian",
+      "skills": [
+        {
+          "name": "Blight Resistance",
+          "level": 1
+        },
+        {
+          "name": "Wide-Range",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Dober",
+      "skills": [
+        {
+          "name": "Dragon Attack",
+          "level": 1
+        },
+        {
+          "name": "Power Prolonger",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2,
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Shell-Studded",
+      "skills": [
+        {
+          "name": "Spread Up",
+          "level": 1
+        },
+        {
+          "name": "Normal/Rapid Up",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Melahoa",
+      "skills": [
+        {
+          "name": "Paralysis Resistance",
+          "level": 1
+        },
+        {
+          "name": "Botanist",
+          "level": 1
+        },
+        {
+          "name": "Recovery Up",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Death Stench",
+      "skills": [
+        {
+          "name": "Maximum Might",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Mosgharl",
+      "skills": [
+        {
+          "name": "Blast Resistance",
+          "level": 1
+        },
+        {
+          "name": "Flinch Free",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2,
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Vaik",
+      "skills": [
+        {
+          "name": "Normal/Rapid Up",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Makluva",
+      "skills": [
+        {
+          "name": "Bubbly Dance",
+          "level": 1
+        },
+        {
+          "name": "Leap of Faith",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Utsushi V",
+      "skills": [
+        {
+          "name": "Wide-Range",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Utsushi H",
+      "skills": [
+        {
+          "name": "Evade Window",
+          "level": 1
+        },
+        {
+          "name": "Wirebug Whisperer",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Remobra",
+      "skills": [
+        {
+          "name": "Critical Element",
+          "level": 1
+        },
+        {
+          "name": "Windproof",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 52
+    },
+    {
+      "name": "Somnacanth",
+      "skills": [
+        {
+          "name": "Bombardier",
+          "level": 2
+        },
+        {
+          "name": "Divine Blessing",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 58
+    },
+    {
+      "name": "Barioth",
+      "skills": [
+        {
+          "name": "Quick Sheath",
+          "level": 1
+        },
+        {
+          "name": "Maximum Might",
+          "level": 1
+        },
+        {
+          "name": "Critical Eye",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 58
+    },
+    {
+      "name": "Kadachi",
+      "skills": [
+        {
+          "name": "Constitution",
+          "level": 3
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 58
+    },
+    {
+      "name": "Anja",
+      "skills": [
+        {
+          "name": "Slugger",
+          "level": 2
+        },
+        {
+          "name": "Attack Boost",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1
+      ],
+      "defense": 60
+    },
+    {
+      "name": "Nargacuga",
+      "skills": [
+        {
+          "name": "Evade Window",
+          "level": 1
+        },
+        {
+          "name": "Evade Extender",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 60
+    },
+    {
+      "name": "Mizutsune",
+      "skills": [
+        {
+          "name": "Resuscitate",
+          "level": 1
+        },
+        {
+          "name": "Free Meal",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 60
+    },
+    {
+      "name": "Rathalos",
+      "skills": [
+        {
+          "name": "Attack Boost",
+          "level": 2
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 62
+    },
+    {
+      "name": "Zinogre",
+      "skills": [
+        {
+          "name": "Latent Power",
+          "level": 1
+        },
+        {
+          "name": "Constitution",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 62
+    },
+    {
+      "name": "Aelucanth",
+      "skills": [
+        {
+          "name": "Evade Window",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3
+      ],
+      "defense": 62
+    },
+    {
+      "name": "Jelly",
+      "skills": [
+        {
+          "name": "Divine Blessing",
+          "level": 2
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 62
+    },
+    {
+      "name": "Sinister",
+      "skills": [
+        {
+          "name": "Hellfire Cloak",
+          "level": 1
+        },
+        {
+          "name": "Handicraft",
+          "level": 2
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 64
+    },
+    {
+      "name": "Goss Harag",
+      "skills": [
+        {
+          "name": "Critical Draw",
+          "level": 1
+        },
+        {
+          "name": "Punishing Draw",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 64
+    },
+    {
+      "name": "Almudron",
+      "skills": [
+        {
+          "name": "Rapid Morph",
+          "level": 1
+        },
+        {
+          "name": "Evade Window",
+          "level": 1
+        }
+      ],
+      "slots": [
+        1,
+        1
+      ],
+      "defense": 64
+    },
+    {
+      "name": "Tigrex",
+      "skills": [
+        {
+          "name": "Bludgeoner",
+          "level": 2
+        },
+        {
+          "name": "Mind's Eye",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3
+      ],
+      "defense": 64
+    },
+    {
+      "name": "Diablos",
+      "skills": [
+        {
+          "name": "Offensive Guard",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2,
+        1
+      ],
+      "defense": 64
+    },
+    {
+      "name": "Rakna-Kadaki",
+      "skills": [
+        {
+          "name": "Constitution",
+          "level": 2
+        },
+        {
+          "name": "Stamina Surge",
+          "level": 1
+        }
+      ],
+      "slots": [
+        2
+      ],
+      "defense": 66
+    },
+    {
+      "name": "Golden",
+      "skills": [
+        {
+          "name": "Heroics",
+          "level": 1
+        },
+        {
+          "name": "Latent Power",
+          "level": 1
+        }
+      ],
+      "slots": [
+        3,
+        1
+      ],
+      "defense": 70
+    },
+    {
+      "name": "Ibushi",
+      "skills": [
+        {
+          "name": "Wind Alignment",
+          "level": 1
+        },
+        {
+          "name": "Constitution",
+          "level": 1
+        },
+        {
+          "name": "Stamina Surge",
+          "level": 1
+        }
+      ],
+      "slots": [],
+      "defense": 66
+    },
+    {
+      "name": "Narwa",
+      "skills": [
+        {
+          "name": "Thunder Alignment",
+          "level": 1
+        },
+        {
+          "name": "Guard",
+          "level": 1
+        },
+        {
+          "name": "Partbreaker",
+          "level": 1
+        }
+      ],
+      "slots": [],
+      "defense": 76
+    }
+  ]
+}

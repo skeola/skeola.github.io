@@ -1,6 +1,14 @@
-// Grabs all photos and adds them to the photo div
-let selectedSkills = {}
+let selectedSkills = {};
+let headArmor = {};
+let chestArmor = {};
+let armsArmor = {};
+let waistArmor = {};
+let legsArmor = {};
+let skillList = {};
+let armorsBySkill = null;
 loadArmorSkills();
+loadArmorPieces();
+
 
 // Loads the full list of skills from the skills.json file
 async function loadArmorSkills(){
@@ -9,15 +17,37 @@ async function loadArmorSkills(){
   .then(data => setArmorSkillDropdown(data));
 }
 
+// Loads armor pieces into our containers
+async function loadArmorPieces(){
+  fetch('https://skeola.github.io/js/head.json')
+  .then(response => response.json())
+  .then(data => headArmor = data);
+  fetch('https://skeola.github.io/js/chest.json')
+  .then(response => response.json())
+  .then(data => chestArmor = data);
+  fetch('https://skeola.github.io/js/arms.json')
+  .then(response => response.json())
+  .then(data => armsArmor = data);
+  fetch('https://skeola.github.io/js/waist.json')
+  .then(response => response.json())
+  .then(data => waistArmor = data);
+  fetch('https://skeola.github.io/js/legs.json')
+  .then(response => response.json())
+  .then(data => legsArmor = data);
+}
+
 // Initializes the full skill list
 function setArmorSkillDropdown(data){
   let dropdown = document.getElementById("skill-select");
   for(let sk of Object.keys(data).sort()){
+    // Create dropdown option
     let newSkill = document.createElement("option");
     newSkill.innerText = sk;
     newSkill.value = data[sk];
     dropdown.appendChild(newSkill);
   }
+  // Save data object for later use
+  skillList = data;
 }
 
 // Adds the selected skill to the selectedSkills list
@@ -78,7 +108,6 @@ function updateLevels(elem){
   selectedSkills[name] = elem.value;
 }
 
-
 // Creates a dropdown menu under elem ranging from 0 - max
 function createLevelRange(elem, max){
   for(let i=0;i<=max; i++){
@@ -91,5 +120,8 @@ function createLevelRange(elem, max){
 
 // 
 function search(){
-  console.log(selectedSkills)
+  // If this is the first search, we initialize armorsBySkill
+  if(armorsBySkill == null){
+
+  }
 }
