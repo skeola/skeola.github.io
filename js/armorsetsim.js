@@ -122,6 +122,50 @@ function createLevelRange(elem, max){
 function search(){
   // If this is the first search, we initialize armorsBySkill
   if(armorsBySkill == null){
+    setABS();
+  }
+}
 
+// Initializes the object containing each armor piece sorted by
+// which armor skills it contains
+function setABS(){
+  // Create a blank version of the skillList
+  let newObj = Object.assign({}, skillList);
+  for(let key of Object.keys(newObj)){
+    newObj[key] = []
+  }
+  armorsBySkill = {
+    "head": newObj
+  };
+  armorsBySkill["chest"] = JSON.parse(JSON.stringify(newObj));
+  armorsBySkill["arms"] = JSON.parse(JSON.stringify(newObj));
+  armorsBySkill["waist"] = JSON.parse(JSON.stringify(newObj));
+  armorsBySkill["legs"] = JSON.parse(JSON.stringify(newObj));
+
+  // Iterate through all armor pieces, adding them to their appropriate list
+  for(key of Object.keys(headArmor)){
+    for(skill of headArmor[key]["skills"]){
+      armorsBySkill["head"][skill["name"]].push(key);
+    }
+  }
+  for(key of Object.keys(chestArmor)){
+    for(skill of chestArmor[key]["skills"]){
+      armorsBySkill["chest"][skill["name"]].push(key);
+    }
+  }
+  for(key of Object.keys(armsArmor)){
+    for(skill of armsArmor[key]["skills"]){
+      armorsBySkill["arms"][skill["name"]].push(key);
+    }
+  }
+  for(key of Object.keys(waistArmor)){
+    for(skill of waistArmor[key]["skills"]){
+      armorsBySkill["waist"][skill["name"]].push(key);
+    }
+  }
+  for(key of Object.keys(legsArmor)){
+    for(skill of legsArmor[key]["skills"]){
+      armorsBySkill["legs"][skill["name"]].push(key);
+    }
   }
 }
