@@ -134,25 +134,44 @@ a {
 .search-section {
   flex: 1;
   border-right: 2px solid black;
-  font-size: 18px;
-}
-
-.results-section {
-  flex: 5;
-  display: flex;
-  flex-direction: row;
-  padding: 0px;
 }
 
 .search-header {
-  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
   border-bottom: 2px solid black;
+  justify-content: center;
+}
+
+.search-header-text {
+  margin: 9px;
   font-size: 18px;
 }
 
 .search-bar {
   display: flex;
   justify-content: space-evenly;
+  padding: 5px;
+}
+
+.search-button {
+  margin: 4px;
+}
+
+.results-section {
+  flex: 5;
+}
+
+.results-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-bottom: 2px solid black;
+}
+
+.results-header-text {
+  margin: 9px;
+  font-size: 18px;
 }
 
 .sim-col {
