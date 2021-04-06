@@ -67,14 +67,13 @@
                     <label for="hr-only">High-Rank Only</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="option2" name="options" checked>
-                    <label for="option2">These do nothing rn</label>
+                    <input type="checkbox" id="num-pieces" name="options" checked>
+                    <label for="option2">Minimize Pieces</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="option3" name="options" checked>
-                    <label for="option3">Option 3</label>
+                    <input type="checkbox" id="defense" name="options" checked>
+                    <label for="option3">Maximize Defense</label>
                   </div>
-                  <button type="button" onclick="search()">Search</button>
                 </div>
               </div>
               <div class="title-section">
@@ -84,7 +83,10 @@
             </div>
             <div class="simulator">
               <div class="search-section">
-                <p class="search-header">Skills</p>
+                <div class="search-header">
+                  <p class="search-header-text">Skills</p>
+                </div>
+                <button class="search-button" type="button" onclick="search()">Search</button>
                 <div class="search-bar">
                   <select name="skills" id="skill-select">
                     <option value="">--choose a skill--</option>
@@ -95,20 +97,12 @@
                 </div>
               </div>
               <div class="results-section">
-                <div class="sim-col">
-                  <p class="search-header">Head</p>
-                </div>
-                <div class="sim-col">
-                  <p class="search-header">Chest</p>
-                </div>
-                <div class="sim-col">
-                  <p class="search-header">Arms</p>
-                </div>
-                <div class="sim-col">
-                  <p class="search-header">Waist</p>
-                </div>
-                <div class="sim-col">
-                  <p class="search-header">Legs</p>
+                <div class="results-header">
+                  <p class="results-header-text">Head</p>
+                  <p class="results-header-text">Chest</p>
+                  <p class="results-header-text">Arms</p>
+                  <p class="results-header-text">Waist</p>
+                  <p class="results-header-text">Legs</p>
                 </div>
               </div>
             </div>
