@@ -105,7 +105,7 @@ a {
 }
 
 .title {
-  font-size: 36px;
+  font-size: 54px;
 }
 
 .title-sub {
@@ -134,6 +134,8 @@ a {
 .search-section {
   flex: 1;
   border-right: 2px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-header {
@@ -149,28 +151,31 @@ a {
 }
 
 .search-bar {
+  flex: 1;
   display: flex;
   justify-content: space-evenly;
   padding: 5px;
 }
 
 .search-button {
+  flex: 2;
   margin: 4px;
+  font-size: 20px;
 }
 
 .results-section {
   flex: 5;
 }
 
-
 .results-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   border-bottom: 2px solid black;
 }
 
 .results-header-text {
+  flex: 1;
   margin: 9px;
   font-size: 18px;
 }
@@ -186,4 +191,12 @@ a {
   justify-content: space-between;
   margin: 2px;
   align-items: center;
+}
+
+.selected-skills {
+  flex: 12;
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  overflow-y: scroll;
 }

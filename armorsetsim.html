@@ -12,7 +12,7 @@
 	<body>
 		<main>
       <div class="flex-container">
-        <div class="left-col">
+        <!-- <div class="left-col">
           <div>
             <img src="images/self.jpg" alt="me.jpg" class="self-pic"/>
             <p class="title" >Shannon<br/>Kaleookalani<br/>Keola</p>
@@ -56,7 +56,7 @@
             <p>"I ka w&#257; ma mua, I ka w&#257; ma hope."</p>
             <p>Use the past to understand the future.</p>
           </div>
-        </div>
+        </div> -->
           <div class="right-col">
             <div class="header-section">
               <div class="option-section">
@@ -68,11 +68,11 @@
                   </div>
                   <div>
                     <input type="checkbox" id="num-pieces" name="options" checked>
-                    <label for="option2">Minimize Pieces</label>
+                    <label for="num-pieces">Minimize Pieces</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="defense" name="options" checked>
-                    <label for="option3">Maximize Defense</label>
+                    <input type="checkbox" id="defense" name="options">
+                    <label for="defense">Maximize Defense</label>
                   </div>
                 </div>
               </div>
@@ -86,7 +86,6 @@
                 <div class="search-header">
                   <p class="search-header-text">Skills</p>
                 </div>
-                <button class="search-button" type="button" onclick="search()">Search</button>
                 <div class="search-bar">
                   <select name="skills" id="skill-select">
                     <option value="">--choose a skill--</option>
@@ -95,6 +94,7 @@
                 </div>
                 <div class="selected-skills" id="selected-skills">
                 </div>
+                <button class="search-button" type="button" onclick="search()">Search</button>
               </div>
               <div class="results-section">
                 <div class="results-header">
@@ -103,6 +103,7 @@
                   <p class="results-header-text">Arms</p>
                   <p class="results-header-text">Waist</p>
                   <p class="results-header-text">Legs</p>
+                  <p class="results-header-text">Decorations</p>
                 </div>
               </div>
             </div>
