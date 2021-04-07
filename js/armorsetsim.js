@@ -168,18 +168,16 @@ function search(){
     }
   }
 
-  console.log(matchingPieceList)
-  console.log(selectedSkills)
   // Brute force search every combination lol hopefully I find a better way later
   for(let head of matchingPieceList["head"].keys()){
     for(let chest of matchingPieceList["chest"].keys()){
       for(let arms of matchingPieceList["arms"].keys()){
         for(let waist of matchingPieceList["waist"].keys()){
           for(let legs of matchingPieceList["legs"].keys()){
-            console.log(headArmor)
-            console.log(headArmor[head])
             // Calculate the total skills this set will give
             let currentSkills = {};
+            let decoCount = [0, 0, 0];
+
             for(let skill of headArmor[head]["skills"]){
               if(skill["name"] in currentSkills){
                 currentSkills[skill["name"]] += skill["level"];
@@ -188,7 +186,7 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
-            for(let skill of chest["skills"]){
+            for(let skill of chestArmor[chest]["skills"]){
               if(skill["name"] in currentSkills){
                 currentSkills[skill["name"]] += skill["level"];
               }
@@ -196,7 +194,7 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
-            for(let skill of arms["skills"]){
+            for(let skill of armsArmor[arms]["skills"]){
               if(skill["name"] in currentSkills){
                 currentSkills[skill["name"]] += skill["level"];
               }
@@ -204,7 +202,7 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
-            for(let skill of waist["skills"]){
+            for(let skill of waistArmor[waist]["skills"]){
               if(skill["name"] in currentSkills){
                 currentSkills[skill["name"]] += skill["level"];
               }
@@ -212,7 +210,7 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
-            for(let skill of legs["skills"]){
+            for(let skill of legsArmor[legs]["skills"]){
               if(skill["name"] in currentSkills){
                 currentSkills[skill["name"]] += skill["level"];
               }
@@ -220,16 +218,23 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
-            console.log("im her")
             let success = true;
             // Compare to required criteria
-            for(let skill of selectedSkills){
+            console.log(currentSkills)
+            for(let skill of Object.keys(selectedSkills)){
               if(currentSkills[skill] < selectedSkills[skill]){
                 success = false;
+                break;
               }
             }
             if(success == true){
-              console.log(head, chest, arms, waist, legs)
+              // Calculate decoration slots
+              for(let val in headArmor[head]["slots"]){ decoCount[val-1] += 1; }
+              for(let val in chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
+              for(let val in armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
+              for(let val in waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
+              for(let val in legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
+              renderArmorSet([head, chest, arms, waist, legs], decoCount);
             }
           }
         }
