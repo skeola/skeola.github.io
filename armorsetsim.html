@@ -63,16 +63,16 @@
                 <p class="main-text" style="text-decoration: underline;">Options</p>
                 <div class="options">
                   <div>
-                    <input type="checkbox" id="hr-only" name="options" checked disabled>
-                    <label for="hr-only" title="Include high rank armor only">HR Only</label>
+                    <input type="checkbox" id="minPieces" name="options" onclick="pressCheckbox(this.id)">
+                    <label for="minPieces" title="Look for minimum number of pieces to satisfy search">HR Only</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="num-pieces" name="options" checked>
-                    <label for="num-pieces">Minimize Pieces</label>
+                    <input type="checkbox" id="maxDeco" name="options" onclick="pressCheckbox(this.id)">
+                    <label for="maxDeco" title="Maximize value of empty decorations">Minimize Pieces</label>
                   </div>
                   <div>
-                    <input type="checkbox" id="defense" name="options">
-                    <label for="defense">Maximize Defense</label>
+                    <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
+                    <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
                   </div>
                 </div>
               </div>

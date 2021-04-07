@@ -1,31 +1,33 @@
-let selectedSkills = {};
-let headArmor = {};
-let chestArmor = {};
-let armsArmor = {};
-let waistArmor = {};
-let legsArmor = {};
-let skillList = {};
+// Globals
+let selectedSkills = {}, skillList = {}, displayList = {};
 let armorsBySkill = null;
-let displayList = {
-  "head": new Set(),
-  "chest": new Set(),
-  "arms": new Set(),
-  "waist": new Set(),
-  "legs": new Set()
-}
-loadArmorSkills();
-loadArmorPieces();
+let headArmor = {}, // Eventually condense this into a single object?
+chestArmor = {},
+armsArmor = {},
+waistArmor = {},
+legsArmor = {};
 
+// Flags
+let minPieces = false, maxDef = false, maxDeco = false;
+
+// Init
+initArmorSkills();
+initArmorPieces();
+
+
+///////////////////////////////
+// -------INITIALIZERS-------//
+///////////////////////////////
 
 // Loads the full list of skills from the skills.json file
-async function loadArmorSkills(){
+async function initArmorSkills(){
   fetch('https://skeola.github.io/js/skills.json')
   .then(response => response.json())
-  .then(data => setArmorSkillDropdown(data));
+  .then(data => initArmorSkillDropdown(data));
 }
 
 // Loads armor pieces into our containers
-async function loadArmorPieces(){
+async function initArmorPieces(){
   fetch('https://skeola.github.io/js/head.json')
   .then(response => response.json())
   .then(data => headArmor = data);
@@ -44,7 +46,7 @@ async function loadArmorPieces(){
 }
 
 // Initializes the full skill list
-function setArmorSkillDropdown(data){
+function initArmorSkillDropdown(data){
   let dropdown = document.getElementById("skill-select");
   for(let sk of Object.keys(data).sort()){
     // Create dropdown option
@@ -57,6 +59,47 @@ function setArmorSkillDropdown(data){
   skillList = data;
 }
 
+///////////////////////////
+// ------RENDERING------ //
+///////////////////////////
+
+// This version simply adds the new skill to the bottom of the list
+function renderSelectedSkills() {
+  // Get div
+  let selected = document.getElementById("selected-skills");
+  
+  // Clear old skills
+  while (selected.firstChild) {
+    selected.removeChild(selected.firstChild);
+  }
+
+  // Create the skill name text and dropdown selector for each selected skill
+  for(let name of Object.keys(selectedSkills)){
+    // Create new skill div container
+    let newSkill = document.createElement("div");
+    newSkill.className = "selected-skill";
+    let newSkillText = document.createElement("p");
+    newSkillText.innerText = name;
+
+    // Add level selector dropdown
+    let newSkillLevel = document.createElement("select");
+    newSkillLevel.onchange = function() {updateLevels(this)};
+    createLevelRange(newSkillLevel, skillList[name]);
+    
+    // Append to the skill list
+    newSkill.appendChild(newSkillText);
+    newSkill.appendChild(newSkillLevel);
+    selected.appendChild(newSkill);
+  }
+
+
+}
+
+/////////////////////////
+// ------BUTTONS------ //
+/////////////////////////
+
+// Called when "Add" button is pressed
 // Adds the selected skill to the selectedSkills list
 function addSkill() {
   let select = document.getElementById("skill-select");
@@ -66,66 +109,14 @@ function addSkill() {
     opt = options[i];
     if(opt.selected && !Object.keys(selectedSkills).includes(opt.innerText)) {
       selectedSkills[opt.innerText] = 0;
-      updateSkillDisplay(opt.innerText, opt.value);
+      renderSelectedSkills();
       break;
     }
   }
 };
 
-// This old version removes all elements and updates them
-// Potentially useful later?
-function updateSkillDisplay_Old() {
-  let selected = document.getElementById("selected-skills");
-  while(selected.lastElementChild){
-    selected.removeChild(selected.lastElementChild)
-  }
-
-  let tempArray = Array.from(selectedSkills).sort();
-
-  for(let item of tempArray){
-    let newSkill = document.createElement("p");
-    newSkill.innerText = item;
-    selected.appendChild(newSkill);
-  }
-}
-
-// This version simply adds the new skill to the bottom of the list
-function updateSkillDisplay(name, value) {
-  let selected = document.getElementById("selected-skills");
-
-  // Create the skill name text and dropdown selector
-  let newSkill = document.createElement("div");
-  newSkill.className = "selected-skill";
-  let newSkillText = document.createElement("p");
-  newSkillText.innerText = name;
-  let newSkillLevel = document.createElement("select");
-  newSkillLevel.onchange = function() {updateLevels(this)};
-  createLevelRange(newSkillLevel, value)
-
-  // Append to the skill list
-  newSkill.appendChild(newSkillText);
-  newSkill.appendChild(newSkillLevel);
-  selected.appendChild(newSkill);
-}
-
-// Called every time you change the selector for a skill
-// Updates the level of the particular skill in selectedSkills
-function updateLevels(elem){
-  let name = elem.parentElement.getElementsByTagName("p")[0].innerText;
-  selectedSkills[name] = elem.value;
-}
-
-// Creates a dropdown menu under elem ranging from 0 - max
-function createLevelRange(elem, max){
-  for(let i=0;i<=max; i++){
-    let newLevel = document.createElement("option");
-    newLevel.innerText = i;
-    newLevel.value = i;
-    elem.appendChild(newLevel);
-  }
-}
-
-// 
+// Called when "Search" is pressed
+// Searches for matching sets based on selected skills
 function search(){
   // If this is the first search, we initialize armorsBySkill
   if(armorsBySkill == null){ setABS(); }
@@ -165,7 +156,6 @@ function search(){
     let idName = "results-" + key;
     let col = document.getElementById(idName);
     for(let name of displayList[key].values()){
-      console.log(displayList[key])
       let newRes = document.createElement("p");
       newRes.innerText = name;
       newRes.className = "result";
@@ -174,8 +164,44 @@ function search(){
   }
 }
 
+// Called when a checkbox is pressed
+// Flips the current value
+function pressCheckbox(name){
+  if(name = "minPieces"){
+    minPieces = !minPieces;
+  }
+  if(name = "maxDeco"){
+    maxDeco = !maxDeco;
+  }
+  if(name = "maxDef"){
+    maxDef = !maxDef;
+  }
+}
+
+/////////////////////////
+// ------HELPERS------ //
+/////////////////////////
+
+// Called every time you change the selector for a skill
+// Updates the level of the particular skill in selectedSkills
+function updateLevels(elem){
+  let name = elem.parentElement.getElementsByTagName("p")[0].innerText;
+  selectedSkills[name] = parseInt(elem.value);
+}
+
+// Creates a dropdown menu under elem ranging from 0 - max
+function createLevelRange(elem, max){
+  for(let i=0;i<=max; i++){
+    let newLevel = document.createElement("option");
+    newLevel.innerText = i;
+    newLevel.value = i;
+    elem.appendChild(newLevel);
+  }
+}
+
 // Initializes the object containing each armor piece sorted by
 // which armor skills it contains
+// Called once when the first search is made
 function setABS(){
   // Create a blank version of the skillList
   let newObj = Object.assign({}, skillList);
