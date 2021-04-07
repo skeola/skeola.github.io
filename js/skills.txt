@@ -101,4 +101,4 @@ Counterstrike, 3
 Rapid Morph, 3
 Hellfire Cloak, 4
 Wind Alignment, 5
-Thunder Alightment, 5
+Thunder Alignment, 5

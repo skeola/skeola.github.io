@@ -6,6 +6,13 @@ let waistArmor = {};
 let legsArmor = {};
 let skillList = {};
 let armorsBySkill = null;
+let displayList = {
+  "head": new Set(),
+  "chest": new Set(),
+  "arms": new Set(),
+  "waist": new Set(),
+  "legs": new Set()
+}
 loadArmorSkills();
 loadArmorPieces();
 
@@ -121,8 +128,49 @@ function createLevelRange(elem, max){
 // 
 function search(){
   // If this is the first search, we initialize armorsBySkill
-  if(armorsBySkill == null){
-    setABS();
+  if(armorsBySkill == null){ setABS(); }
+
+  // Reset old display list
+  displayList = {
+    "head": new Set(),
+    "chest": new Set(),
+    "arms": new Set(),
+    "waist": new Set(),
+    "legs": new Set()
+  }
+
+  // Reset results columns
+  for(let key of Object.keys(displayList)){
+    let idName = "results-" + key;
+    let col = document.getElementById(idName);
+    while (col.firstChild) {
+      col.removeChild(col.firstChild);
+    }
+  }
+
+  // Add each required skill's pieces to the set by name
+  // For each armor type (head, chest, ...)
+  for(let key of Object.keys(displayList)){
+    // For each required armor skill
+    for(let skill of Object.keys(selectedSkills)){
+      // For each entry in the list of armor names
+      for(let name of armorsBySkill[key][skill]){
+        displayList[key].add(name)
+      }
+    }
+  }
+
+  // Display results in the corresponding columns
+  for(let key of Object.keys(displayList)){
+    let idName = "results-" + key;
+    let col = document.getElementById(idName);
+    for(let name of displayList[key].values()){
+      console.log(displayList[key])
+      let newRes = document.createElement("p");
+      newRes.innerText = name;
+      newRes.className = "result";
+      col.appendChild(newRes);
+    }
   }
 }
 
@@ -168,4 +216,5 @@ function setABS(){
       armorsBySkill["legs"][skill["name"]].push(key);
     }
   }
+  console.log("Sorted armor loading complete")
 }
