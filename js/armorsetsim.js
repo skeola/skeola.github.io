@@ -259,9 +259,7 @@ function search(){
               }
             }
             
-            if(success == true){              
-              console.log(currentSkills)
-              console.log(selectedSkills)
+            if(success == true){
               count += 1;
               if(count>500){
                 window.alert("Over 500+ results for this search, please narrow the criteria!");
