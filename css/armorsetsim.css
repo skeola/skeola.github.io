@@ -176,7 +176,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /* margin-right: 12px; */
+  margin-right: 7px;
 }
 
 .results-header-text {
@@ -190,7 +190,7 @@ a {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  scrollbar-width: none;
+  scrollbar-width: thin;
   border-top: 2px solid black;
 
 }
@@ -222,6 +222,7 @@ a {
   flex-direction: column;
   margin: 2px;
   overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .remove-button-container {
