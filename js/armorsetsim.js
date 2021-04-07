@@ -1,5 +1,5 @@
 // Globals
-let selectedSkills = {}, skillList = {}, displayList = {};
+let selectedSkills = {}, skillList = {}, resultsList = {};
 let armorsBySkill = null;
 let headArmor = {}, // Eventually condense this into a single object?
 chestArmor = {},
@@ -45,7 +45,7 @@ async function initArmorPieces(){
   .then(data => legsArmor = data);
 }
 
-// Initializes the full skill list
+// Initializes the skillList and skill list dropdown
 function initArmorSkillDropdown(data){
   let dropdown = document.getElementById("skill-select");
   for(let sk of Object.keys(data).sort()){
@@ -63,7 +63,7 @@ function initArmorSkillDropdown(data){
 // ------RENDERING------ //
 ///////////////////////////
 
-// This version simply adds the new skill to the bottom of the list
+// Renders the selectedSkills as a scrolling box in the search section
 function renderSelectedSkills() {
   // Get div
   let selected = document.getElementById("selected-skills");
@@ -95,6 +95,23 @@ function renderSelectedSkills() {
 
 }
 
+// Renders a set of armors and decoration slots
+// Needs to be passed a set of armor names and decoration info
+function renderArmorSet(armors, slots){
+
+}
+
+// Clears resulting armor sets
+function clearResults(){
+  // Clear rendered sets
+  let res = document.getElementsByClassName("results");
+  while(res.firstChild){
+    res.removeChild(res.firstChild);
+  }
+  // Clear array
+  resultsList = {};
+}
+
 /////////////////////////
 // ------BUTTONS------ //
 /////////////////////////
@@ -118,48 +135,105 @@ function addSkill() {
 // Called when "Search" is pressed
 // Searches for matching sets based on selected skills
 function search(){
+
   // If this is the first search, we initialize armorsBySkill
   if(armorsBySkill == null){ setABS(); }
 
-  // Reset old display list
-  displayList = {
+  // Reset results columns
+  clearResults();
+
+  // Init sets for matching armor piece names
+  let matchingPieceList = {
     "head": new Set(),
     "chest": new Set(),
     "arms": new Set(),
     "waist": new Set(),
     "legs": new Set()
   }
-
-  // Reset results columns
-  for(let key of Object.keys(displayList)){
-    let idName = "results-" + key;
-    let col = document.getElementById(idName);
-    while (col.firstChild) {
-      col.removeChild(col.firstChild);
-    }
-  }
+  // Init array for full sets that match criteria
+  let matchingSetList = [];
 
   // Add each required skill's pieces to the set by name
   // For each armor type (head, chest, ...)
-  for(let key of Object.keys(displayList)){
-    // For each required armor skill
+  for(let key of Object.keys(matchingPieceList)){
+    // Add placeholder item (imitates an empty/unneeded piece)
+    matchingPieceList[key].add("---");
+
+    // For each armor skill in this armor piece
     for(let skill of Object.keys(selectedSkills)){
       // For each entry in the list of armor names
       for(let name of armorsBySkill[key][skill]){
-        displayList[key].add(name)
+        matchingPieceList[key].add(name)
       }
     }
   }
 
-  // Display results in the corresponding columns
-  for(let key of Object.keys(displayList)){
-    let idName = "results-" + key;
-    let col = document.getElementById(idName);
-    for(let name of displayList[key].values()){
-      let newRes = document.createElement("p");
-      newRes.innerText = name;
-      newRes.className = "result";
-      col.appendChild(newRes);
+  console.log(matchingPieceList)
+  console.log(selectedSkills)
+  // Brute force search every combination lol hopefully I find a better way later
+  for(let head of matchingPieceList["head"].keys()){
+    for(let chest of matchingPieceList["chest"].keys()){
+      for(let arms of matchingPieceList["arms"].keys()){
+        for(let waist of matchingPieceList["waist"].keys()){
+          for(let legs of matchingPieceList["legs"].keys()){
+            console.log(headArmor)
+            console.log(headArmor[head])
+            // Calculate the total skills this set will give
+            let currentSkills = {};
+            for(let skill of headArmor[head]["skills"]){
+              if(skill["name"] in currentSkills){
+                currentSkills[skill["name"]] += skill["level"];
+              }
+              else{
+                currentSkills[skill["name"]] = skill["level"];
+              }
+            }
+            for(let skill of chest["skills"]){
+              if(skill["name"] in currentSkills){
+                currentSkills[skill["name"]] += skill["level"];
+              }
+              else{
+                currentSkills[skill["name"]] = skill["level"];
+              }
+            }
+            for(let skill of arms["skills"]){
+              if(skill["name"] in currentSkills){
+                currentSkills[skill["name"]] += skill["level"];
+              }
+              else{
+                currentSkills[skill["name"]] = skill["level"];
+              }
+            }
+            for(let skill of waist["skills"]){
+              if(skill["name"] in currentSkills){
+                currentSkills[skill["name"]] += skill["level"];
+              }
+              else{
+                currentSkills[skill["name"]] = skill["level"];
+              }
+            }
+            for(let skill of legs["skills"]){
+              if(skill["name"] in currentSkills){
+                currentSkills[skill["name"]] += skill["level"];
+              }
+              else{
+                currentSkills[skill["name"]] = skill["level"];
+              }
+            }
+            console.log("im her")
+            let success = true;
+            // Compare to required criteria
+            for(let skill of selectedSkills){
+              if(currentSkills[skill] < selectedSkills[skill]){
+                success = false;
+              }
+            }
+            if(success == true){
+              console.log(head, chest, arms, waist, legs)
+            }
+          }
+        }
+      }
     }
   }
 }
