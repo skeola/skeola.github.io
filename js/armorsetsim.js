@@ -84,27 +84,52 @@ function renderSelectedSkills() {
     // Add level selector dropdown
     let newSkillLevel = document.createElement("select");
     newSkillLevel.onchange = function() {updateLevels(this)};
-    createLevelRange(newSkillLevel, skillList[name]);
+    createLevelRange(newSkillLevel, skillList[name], selectedSkills[name]);
     
     // Append to the skill list
     newSkill.appendChild(newSkillText);
     newSkill.appendChild(newSkillLevel);
     selected.appendChild(newSkill);
   }
-
-
 }
 
 // Renders a set of armors and decoration slots
 // Needs to be passed a set of armor names and decoration info
 function renderArmorSet(armors, slots){
-
+  let div = document.getElementById("results");
+  let newArmorSet = document.createElement("div");
+  newArmorSet.className = "armor-set";
+  let newHead = document.createElement("p");
+  let newChest = document.createElement("p");
+  let newArms = document.createElement("p");
+  let newWaist = document.createElement("p");
+  let newLegs = document.createElement("p");
+  let newDeco = document.createElement("p");
+  newHead.innerText = armors[0];
+  newChest.innerText = armors[1];
+  newArms.innerText = armors[2];
+  newWaist.innerText = armors[3];
+  newLegs.innerText = armors[4];
+  newDeco.innerText = slots.toString();
+  newHead.className = "armor-piece";
+  newChest.className = "armor-piece";
+  newArms.className = "armor-piece";
+  newWaist.className = "armor-piece";
+  newLegs.className = "armor-piece";
+  newDeco.className = "armor-piece";
+  newArmorSet.appendChild(newHead);
+  newArmorSet.appendChild(newChest);
+  newArmorSet.appendChild(newArms);
+  newArmorSet.appendChild(newWaist);
+  newArmorSet.appendChild(newLegs);
+  newArmorSet.appendChild(newDeco);
+  div.appendChild(newArmorSet);
 }
 
 // Clears resulting armor sets
 function clearResults(){
   // Clear rendered sets
-  let res = document.getElementsByClassName("results");
+  let res = document.getElementById("results");
   while(res.firstChild){
     res.removeChild(res.firstChild);
   }
@@ -161,14 +186,18 @@ function search(){
 
     // For each armor skill in this armor piece
     for(let skill of Object.keys(selectedSkills)){
-      // For each entry in the list of armor names
-      for(let name of armorsBySkill[key][skill]){
-        matchingPieceList[key].add(name)
+      // Check if the skill level has been set to 0
+      if(selectedSkills[skill] != 0){
+        // For each entry in the list of armor names
+        for(let name of armorsBySkill[key][skill]){
+          matchingPieceList[key].add(name)
+        }
       }
     }
   }
 
   // Brute force search every combination lol hopefully I find a better way later
+  let count = 0;
   for(let head of matchingPieceList["head"].keys()){
     for(let chest of matchingPieceList["chest"].keys()){
       for(let arms of matchingPieceList["arms"].keys()){
@@ -218,16 +247,27 @@ function search(){
                 currentSkills[skill["name"]] = skill["level"];
               }
             }
+
             let success = true;
             // Compare to required criteria
-            console.log(currentSkills)
             for(let skill of Object.keys(selectedSkills)){
-              if(currentSkills[skill] < selectedSkills[skill]){
+              if(selectedSkills[skill] == 0){ continue; }
+              // Check if the current set is under the criteria or doesn't appear
+              if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
                 success = false;
                 break;
               }
             }
-            if(success == true){
+            
+            if(success == true){              
+              console.log(currentSkills)
+              console.log(selectedSkills)
+              count += 1;
+              if(count>500){
+                window.alert("Over 500+ results for this search, please narrow the criteria!");
+                return;
+              }
+
               // Calculate decoration slots
               for(let val in headArmor[head]["slots"]){ decoCount[val-1] += 1; }
               for(let val in chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
@@ -269,11 +309,14 @@ function updateLevels(elem){
 }
 
 // Creates a dropdown menu under elem ranging from 0 - max
-function createLevelRange(elem, max){
+function createLevelRange(elem, max, current){
   for(let i=0;i<=max; i++){
     let newLevel = document.createElement("option");
     newLevel.innerText = i;
     newLevel.value = i;
+    if(i==current){
+      newLevel.selected = true;
+    }
     elem.appendChild(newLevel);
   }
 }

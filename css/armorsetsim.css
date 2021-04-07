@@ -188,19 +188,21 @@ a {
 .results {
   flex: 1;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
   overflow-y: scroll;
 }
 
-.result {
-  flex: 1;
-  font-size: 16px;
+.armor-set {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 2px solid black;
 }
 
-.results-col {
+.armor-piece {
   flex: 1;
   margin: 9px;
+  font-size: 18px;
 }
 
 .selected-skill {
