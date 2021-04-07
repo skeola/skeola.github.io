@@ -176,7 +176,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-bottom: 2px solid black;
+  /* margin-right: 12px; */
 }
 
 .results-header-text {
@@ -190,13 +190,16 @@ a {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  scrollbar-width: none;
+  border-top: 2px solid black;
+
 }
 
 .armor-set {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid grey;
 }
 
 .armor-piece {
@@ -219,6 +222,10 @@ a {
   flex-direction: column;
   margin: 2px;
   overflow-y: scroll;
+}
+
+.remove-button-container {
+  display: inline;
 }
 
 /* color1 #0511f2

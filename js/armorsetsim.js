@@ -9,6 +9,7 @@ legsArmor = {};
 
 // Flags
 let minPieces = false, maxDef = false, maxDeco = false;
+let counter =0;
 
 // Init
 initArmorSkills();
@@ -83,6 +84,7 @@ function renderSelectedSkills() {
 
     // Add level selector dropdown
     let newSkillLevel = document.createElement("select");
+    newSkillLevel.className = "selected-level";
     newSkillLevel.onchange = function() {updateLevels(this)};
     createLevelRange(newSkillLevel, skillList[name], selectedSkills[name]);
     
@@ -123,6 +125,14 @@ function renderArmorSet(armors, slots){
   newArmorSet.appendChild(newWaist);
   newArmorSet.appendChild(newLegs);
   newArmorSet.appendChild(newDeco);
+  // Alternate background colors
+  if(counter%2==0){
+    newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.2)";
+  }
+  else{
+    newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.2)";
+  }
+  counter++;
   div.appendChild(newArmorSet);
 }
 
