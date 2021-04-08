@@ -142,14 +142,21 @@ main {
 }
 
 .options{
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .option {
   flex: 1;
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 2px;
+}
+
+.option-dropdown-text {
+  text-indent: 4px;
 }
 /* color1 #0511f2
    color2 #bf9004
