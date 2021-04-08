@@ -11,7 +11,7 @@ let counter = 0;
 let searchCap = 500;
 
 // Flags
-let minPieces = false, maxDef = false, maxDeco = false, useDeco = false;
+let inclSlotArmors = false, useDeco = false;
 
 // Init
 initArmorSkills();
@@ -203,6 +203,13 @@ function search(){
   for(let key of Object.keys(matchingPieceList)){
     // Add placeholder item (imitates an empty/unneeded piece)
     matchingPieceList[key].add("---");
+    // Include slot-only armors if checked
+    if(inclSlotArmors){
+      matchingPieceList["chest"].add("Vaik");
+      matchingPieceList["arms"].add("Jyura");
+      matchingPieceList["waist"].add("Chrome Metal");
+      matchingPieceList["legs"].add("Arzuros");
+    }
 
     // For each armor skill in this armor piece
     for(let skill of Object.keys(selectedSkills)){
@@ -299,8 +306,7 @@ function search(){
                 window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
                 return;
               }
-
-
+              console.log(count)
               renderArmorSet([head, chest, arms, waist, legs], decoCount, decoCopy);
             }
           }
@@ -312,18 +318,16 @@ function search(){
 
 // Called when a checkbox is pressed
 // Flips the current value
-function pressCheckbox(name){
-  if(name = "minPieces"){
-    minPieces = !minPieces;
+function pressCheckbox(id){
+  if(id = "inclSlotArmors"){
+    if(document.getElementById(id).checked){
+      inclSlotArmors = true;
+    }else{ inclSlotArmors = false; }
   }
-  if(name = "maxDeco"){
-    maxDeco = !maxDeco;
-  }
-  if(name = "maxDef"){
-    maxDef = !maxDef;
-  }
-  if(name = "useDeco"){
-    useDeco = !useDeco;
+  if(id = "useDeco"){
+    if(document.getElementById(id).checked){
+      useDeco = true;
+    }else{ useDeco = false; }
   }
 }
 
