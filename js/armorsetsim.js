@@ -8,7 +8,7 @@ waistArmor = {},
 legsArmor = {};
 
 let counter = 0;
-let searchCap = 500;
+let searchCap = 100;
 
 // Flags
 let inclSlotArmors = false, useDeco = false;
@@ -288,12 +288,31 @@ function search(){
             for(let skill of Object.keys(selectedSkills)){
               // If skill was set to 0 then it is no longer needed
               if(selectedSkills[skill] == 0){ continue; }
-              // Check if the current set is under the criteria or doesn't appear
+
+              // Runs when the current skills are not satisfactory
               if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
-                // Check if the skill has a corresponding jewel and enough slots exist to fill the need
-                if(useDeco && skill in decoList && selectedSkills[skill]-currentSkills[skill]<=decoCopy[decoList[skill]-1]){
-                  decoCopy[decoList[skill]-1] -= selectedSkills[skill]-currentSkills[skill];
-                } else{
+                // Runs when decorations can fill the deficit
+                if(useDeco && skill in decoList){
+                  let deficit = selectedSkills[skill] - currentSkills[skill];
+                  let deficitFilled = false;
+
+                  // Check if there are open slots available starting with the 'cheapest'
+                  for(let cost=decoList[skill]; cost<=3; cost++){
+                    // Slot can be filled
+                    if(deficit <= decoCopy[cost-1]){
+                      decoCopy[cost-1] -= deficit;
+                      deficitFilled = true;
+                      break;
+                    }
+                  }
+                  // Success check for this skill
+                  if(!deficitFilled){
+                    success = false;
+                    break; 
+                  }
+                } 
+                // Runs when decorations cannot be used
+                else{
                   success = false;
                   break;
                 }
@@ -306,7 +325,6 @@ function search(){
                 window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
                 return;
               }
-              console.log(count)
               renderArmorSet([head, chest, arms, waist, legs], decoCount, decoCopy);
             }
           }
@@ -406,9 +424,8 @@ function setABS(){
   console.log("Sorted armor loading complete")
 }
 
+// Quick function for displaying/debugging decoration calculations
 function decosAvailable(slotsTotal, slotsAvailable){
-  console.log(slotsTotal)
-  console.log(slotsAvailable)
   let str = "1 - ";
   str += slotsAvailable[0] + "/" + slotsTotal[0] + ", 2 - ";
   str += slotsAvailable[1] + "/" + slotsTotal[1] + ", 3 - ";  
