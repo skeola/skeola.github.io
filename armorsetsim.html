@@ -17,17 +17,17 @@
             <p class="main-text" style="text-decoration: underline;">Options</p>
             <div class="options">
               <div class="option">
-                <input type="checkbox" id="minPieces" name="options" onclick="pressCheckbox(this.id)" checked disabled>
-                <label for="minPieces" title="Look for minimum number of pieces to satisfy search">HR Only</label>
+                <input type="checkbox" id="useDeco" name="options" onclick="pressCheckbox(this.id)">
+                <label for="useDeco" title="Use potential decorations towards criteria">Use Decorations</label>
               </div>
-              <div class="option">
+              <!-- <div class="option">
                 <input type="checkbox" id="maxDeco" name="options" onclick="pressCheckbox(this.id)">
-                <label for="maxDeco" title="Maximize value of empty decorations">Minimize Pieces</label>
+                <label for="maxDeco" title="Maximize value of empty decorations"></label>
               </div>
               <div class="option">
                 <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
                 <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
-              </div>
+              </div> -->
               <div class="option">
                 <select name="result-cap" id="result-cap" onchange="updateResultCap(this)">
                   <option value="100" selected>100</option>
@@ -35,7 +35,7 @@
                   <option value="1000">1000</option>
                   <option value="10000">10000</option>
                 </select>
-                <p class="option-dropdown-text">Result Cap</p>
+                <p class="option-dropdown-text" title="Stops searching after results hit the cap">Result Cap</p>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
               <p class="results-header-text">Arms</p>
               <p class="results-header-text">Waist</p>
               <p class="results-header-text">Legs</p>
-              <p class="results-header-text">Decorations</p>
+              <p class="results-header-text">Deco Available</p>
             </div>
             <div class="results" id="results">
 

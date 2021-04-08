@@ -1,5 +1,5 @@
 // Globals
-let selectedSkills = {}, skillList = {}, resultsList = {};
+let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {};
 let armorsBySkill = null;
 let headArmor = {}, // Eventually condense this into a single object?
 chestArmor = {},
@@ -11,11 +11,12 @@ let counter = 0;
 let searchCap = 500;
 
 // Flags
-let minPieces = false, maxDef = false, maxDeco = false;
+let minPieces = false, maxDef = false, maxDeco = false, useDeco = false;
 
 // Init
 initArmorSkills();
 initArmorPieces();
+initDecorations();
 
 
 ///////////////////////////////
@@ -62,6 +63,13 @@ function initArmorSkillDropdown(data){
   skillList = data;
 }
 
+// Initializes the decoration object
+async function initDecorations(){
+  fetch('https://skeola.github.io/js/decorations.json')
+  .then(response => response.json())
+  .then(data => decoList = data);
+}
+
 ///////////////////////////
 // ------RENDERING------ //
 ///////////////////////////
@@ -99,7 +107,7 @@ function renderSelectedSkills() {
 
 // Renders a set of armors and decoration slots
 // Needs to be passed a set of armor names and decoration info
-function renderArmorSet(armors, slots){
+function renderArmorSet(armors, slotsTotal, slotsAvailable){
   let div = document.getElementById("results");
   let newArmorSet = document.createElement("div");
   newArmorSet.className = "armor-set";
@@ -114,7 +122,7 @@ function renderArmorSet(armors, slots){
   newArms.innerText = armors[2];
   newWaist.innerText = armors[3];
   newLegs.innerText = armors[4];
-  newDeco.innerText = slots.toString();
+  newDeco.innerText = decosAvailable(slotsTotal, slotsAvailable);
   newHead.className = "armor-piece";
   newChest.className = "armor-piece";
   newArms.className = "armor-piece";
@@ -260,14 +268,28 @@ function search(){
               }
             }
 
-            let success = true;
+            // Calculate decoration slots
+            for(let val in headArmor[head]["slots"]){ decoCount[val-1] += 1; }
+            for(let val in chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
+            for(let val in armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
+            for(let val in waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
+            for(let val in legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
+
             // Compare to required criteria
+            let decoCopy = [...decoCount];
+            let success = true;
             for(let skill of Object.keys(selectedSkills)){
+              // If skill was set to 0 then it is no longer needed
               if(selectedSkills[skill] == 0){ continue; }
               // Check if the current set is under the criteria or doesn't appear
               if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
-                success = false;
-                break;
+                // Check if the skill has a corresponding jewel and enough slots exist to fill the need
+                if(useDeco && skill in decoList && selectedSkills[skill]-currentSkills[skill]<=decoCopy[decoList[skill]-1]){
+                  decoCopy[decoList[skill]-1] -= selectedSkills[skill]-currentSkills[skill];
+                } else{
+                  success = false;
+                  break;
+                }
               }
             }
             
@@ -278,13 +300,8 @@ function search(){
                 return;
               }
 
-              // Calculate decoration slots
-              for(let val in headArmor[head]["slots"]){ decoCount[val-1] += 1; }
-              for(let val in chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
-              for(let val in armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
-              for(let val in waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
-              for(let val in legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
-              renderArmorSet([head, chest, arms, waist, legs], decoCount);
+
+              renderArmorSet([head, chest, arms, waist, legs], decoCount, decoCopy);
             }
           }
         }
@@ -304,6 +321,9 @@ function pressCheckbox(name){
   }
   if(name = "maxDef"){
     maxDef = !maxDef;
+  }
+  if(name = "useDeco"){
+    useDeco = !useDeco;
   }
 }
 
@@ -380,4 +400,14 @@ function setABS(){
     }
   }
   console.log("Sorted armor loading complete")
+}
+
+function decosAvailable(slotsTotal, slotsAvailable){
+  console.log(slotsTotal)
+  console.log(slotsAvailable)
+  let str = "1 - ";
+  str += slotsAvailable[0] + "/" + slotsTotal[0] + ", 2 - ";
+  str += slotsAvailable[1] + "/" + slotsTotal[1] + ", 3 - ";  
+  str += slotsAvailable[2] + "/" + slotsTotal[2]
+  return str;
 }
