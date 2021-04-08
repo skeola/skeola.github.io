@@ -1,5 +1,5 @@
 // Globals
-let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {};
+let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {}, charmList = {};
 let armorsBySkill = null;
 let headArmor = {}, // Eventually condense this into a single object?
 chestArmor = {},
