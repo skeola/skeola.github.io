@@ -12,105 +12,67 @@
 	<body>
 		<main>
       <div class="flex-container">
-        <!-- <div class="left-col">
-          <div>
-            <img src="images/self.jpg" alt="me.jpg" class="self-pic"/>
-            <p class="title" >Shannon<br/>Kaleookalani<br/>Keola</p>
-            <p>skkeola@gmail.com</p>
-            <p>B.S. Computer Science<br/>Portland State University<br/>June 2020</p>
-            <p class="text-padding">Interested/specialized in machine learning, 
-              artificial intelligence, and back-end programming.</p>
-            <p>
-              <a href="index.html"
-                  rel="noopener noreferrer">
-                  <img src="images/home.png" alt="Home" class="logo">
-              </a>
-              <a href="https://github.com/skeola" 
-                  target="_blank" 
-                  rel="noopener noreferrer">
-                  <img src="images/GitHub-Mark-Light-32px.png" alt="GitHub" class="logo">
-              </a>   
-              <a href="https://www.linkedin.com/in/shannon-keola" 
-                  target="_blank" 
-                  rel="noopener noreferrer">
-                  <img src="images/LI-In-Bug.png" alt="LinkedIn" class="logo">
-              </a>
-            </p>
-          </div>
-          <div class="categories">
-            <div class="spacer"></div>
-            <div class="alt-links">
-              <a href="projects.html"
-                  rel="noopener noreferrer"
-                  class="category">Personal Projects</a>
-              <a href="photos.html"
-                  rel="noopener noreferrer"
-                  class="category">Gallery</a>
-              <a href="armorsetsim.html"
-                  rel="noopener noreferrer"
-                  class="category">MH:Rise Armor Sim</a>
-            </div>
-            <div class="spacer"></div>
-          </div>
-          <div>
-            <p>"I ka w&#257; ma mua, I ka w&#257; ma hope."</p>
-            <p>Use the past to understand the future.</p>
-          </div>
-        </div> -->
-          <div class="right-col">
-            <div class="header-section">
-              <div class="option-section">
-                <p class="main-text" style="text-decoration: underline;">Options</p>
-                <div class="options">
-                  <div>
-                    <input type="checkbox" id="minPieces" name="options" onclick="pressCheckbox(this.id)">
-                    <label for="minPieces" title="Look for minimum number of pieces to satisfy search">HR Only</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="maxDeco" name="options" onclick="pressCheckbox(this.id)">
-                    <label for="maxDeco" title="Maximize value of empty decorations">Minimize Pieces</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
-                    <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
-                  </div>
-                </div>
+        <div class="header-section">
+          <div class="option-section">
+            <p class="main-text" style="text-decoration: underline;">Options</p>
+            <div class="options">
+              <div class="option">
+                <input type="checkbox" id="minPieces" name="options" onclick="pressCheckbox(this.id)" checked disabled>
+                <label for="minPieces" title="Look for minimum number of pieces to satisfy search">HR Only</label>
               </div>
-              <div class="title-section">
-                <p class="title">MH:Rise Armor Set Simulator</p>
-                <!-- <p class="title-sub">Calculate the perfect set for all your skill set needs!</p> -->
+              <div class="option">
+                <input type="checkbox" id="maxDeco" name="options" onclick="pressCheckbox(this.id)">
+                <label for="maxDeco" title="Maximize value of empty decorations">Minimize Pieces</label>
+              </div>
+              <div class="option">
+                <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
+                <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
+              </div>
+              <div class="option">
+                <select name="result-cap" id="result-cap" onchange="updateResultCap(this)">
+                  <option value="100" selected>100</option>
+                  <option value="500">500</option>
+                  <option value="1000">1000</option>
+                  <option value="10000">10000</option>
+                </select>
+                <p>Result Cap</p>
               </div>
             </div>
-            <div class="simulator">
-              <div class="search-section">
-                <div class="search-header">
-                  <p class="search-header-text">Skills</p>
-                </div>
-                <div class="search-bar">
-                  <select name="skills" id="skill-select">
-                    <option value="">--choose a skill--</option>
-                  </select>
-                  <button type="button" onclick="addSkill()">Add</button>
-                </div>
-                <div class="selected-skills" id="selected-skills">
-                </div>
-                <button class="search-button" type="button" onclick="search()">Search</button>
-              </div>
-              <div class="results-section">
-                <div class="results-header">
-                  <p class="results-header-text">Head</p>
-                  <p class="results-header-text">Chest</p>
-                  <p class="results-header-text">Arms</p>
-                  <p class="results-header-text">Waist</p>
-                  <p class="results-header-text">Legs</p>
-                  <p class="results-header-text">Decorations</p>
-                </div>
-                <div class="results" id="results">
+          </div>
+          <div class="title-section">
+            <p class="title">MH:Rise Armor Set Simulator</p>
+            <!-- <p class="title-sub">Calculate the perfect set for all your skill set needs!</p> -->
+          </div>
+        </div>
+        <div class="simulator-section">
+          <div class="search-section">
+            <div class="search-header">
+              <p class="search-header-text">Skills</p>
+            </div>
+            <div class="search-bar">
+              <select name="skills" id="skill-select">
+                <option value="">--choose a skill--</option>
+              </select>
+              <button type="button" onclick="addSkill()">Add</button>
+            </div>
+            <div class="selected-skills" id="selected-skills">
+            </div>
+            <button class="search-button" type="button" onclick="search()">Search</button>
+          </div>
+          <div class="results-section">
+            <div class="results-header">
+              <p class="results-header-text">Head</p>
+              <p class="results-header-text">Chest</p>
+              <p class="results-header-text">Arms</p>
+              <p class="results-header-text">Waist</p>
+              <p class="results-header-text">Legs</p>
+              <p class="results-header-text">Decorations</p>
+            </div>
+            <div class="results" id="results">
 
-                </div>
-              </div>
             </div>
           </div>
+        </div>
       </div>
 		</main>
 		<script type="text/javascript" src="js/armorsetsim.js"></script>

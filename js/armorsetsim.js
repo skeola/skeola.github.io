@@ -7,9 +7,11 @@ armsArmor = {},
 waistArmor = {},
 legsArmor = {};
 
+let counter = 0;
+let searchCap = 500;
+
 // Flags
 let minPieces = false, maxDef = false, maxDeco = false;
-let counter =0;
 
 // Init
 initArmorSkills();
@@ -127,10 +129,10 @@ function renderArmorSet(armors, slots){
   newArmorSet.appendChild(newDeco);
   // Alternate background colors
   if(counter%2==0){
-    newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.2)";
+    newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
   }
   else{
-    newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.2)";
+    newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.1)";
   }
   counter++;
   div.appendChild(newArmorSet);
@@ -271,8 +273,8 @@ function search(){
             
             if(success == true){
               count += 1;
-              if(count>500){
-                window.alert("Over 500+ results for this search, please narrow the criteria!");
+              if(count>searchCap){
+                window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
                 return;
               }
 
@@ -314,6 +316,11 @@ function pressCheckbox(name){
 function updateLevels(elem){
   let name = elem.parentElement.getElementsByTagName("p")[0].innerText;
   selectedSkills[name] = parseInt(elem.value);
+}
+
+// Called every time the result cap is changed
+function updateResultCap(elem){
+  searchCap = elem.value;
 }
 
 // Creates a dropdown menu under elem ranging from 0 - max

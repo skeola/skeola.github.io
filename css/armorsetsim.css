@@ -9,82 +9,13 @@ main {
 
 .flex-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
   overflow-y: hidden;
 }
 
-.left-col {
-  flex: 1;
-  background-color: #c0B283;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-}
-
-.right-col {
-  flex: 4;
-  display: flex;
-  flex-direction: column;
-  background-color: #f4f4f4;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  overflow-y: hidden;
-}
-
-.self-pic {
-  margin-top: 2vh;
-  max-width: 95%;
-  border-radius: 50%;
-  border-color: #373737;
-  padding: 3px;
-  border-width: 3px;
-  border-style: solid;
-}
-
-p {
-  color: #373737;
-}
-
-a {
-  color: #373737;
-  text-decoration: none;
-}
-
-.text-padding {
-  margin: 1vw;
-}
-
-.big-text-padding {
-  margin: 10vw;
-}
-
-.categories {
-  display: flex;
-}
-
-.spacer {
-  flex: 1;
-}
-
-.alt-links {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  /* flex-grow: 2; */
-}
-
-.category {
-  border: 1px solid #373737;
-  padding: 5px;
-  font-size: 18px;
-}
-.category:hover {
-  background-color: #a7996a;
-}
-
 .header-section {
+  flex: 1;
   display: flex;
   flex-direction: row;
 }
@@ -95,34 +26,12 @@ a {
   margin: 10px;
 }
 
-.options {
-  display: flex;
-  flex-direction: column;
-}
-
 .title-section {
   flex: 5;
 }
 
-.title {
-  font-size: 54px;
-}
-
-.title-sub {
-  font-size: 20px;
-}
-
-.main-text {
-  font-size: 18px;
-}
-
-.logo {
-  margin: 4px;
-  height: 32px;
-}
-
-.simulator {
-  flex: 1;
+.simulator-section {
+  flex: 5;
   margin: 10px;
   display: flex;
   flex-direction: row;
@@ -138,6 +47,21 @@ a {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+}
+
+.results-section {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.title {
+  font-size: 54px;
+}
+
+.main-text {
+  font-size: 18px;
 }
 
 .search-header {
@@ -165,13 +89,6 @@ a {
   font-size: 20px;
 }
 
-.results-section {
-  flex: 5;
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-}
-
 .results-header {
   display: flex;
   flex-direction: row;
@@ -192,7 +109,6 @@ a {
   overflow-y: scroll;
   scrollbar-width: thin;
   border-top: 2px solid black;
-
 }
 
 .armor-set {
@@ -225,10 +141,16 @@ a {
   scrollbar-width: thin;
 }
 
-.remove-button-container {
-  display: inline;
+.options{
+  display: block;
 }
 
+.option {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+}
 /* color1 #0511f2
    color2 #bf9004
 */
