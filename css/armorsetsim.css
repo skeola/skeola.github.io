@@ -127,13 +127,6 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-right: 7px;
-}
-
-.results-header-text {
-  flex: 1;
-  margin: 9px;
-  font-size: 18px;
 }
 
 .results {
@@ -248,6 +241,8 @@ main {
 
 .charms-edit-existing {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .charms-imported {
@@ -271,8 +266,20 @@ main {
   border-top: 1px solid black;
 }
 
-.charm-config-line {
+.charms-list {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  border-top: 1px solid black;
+}
+
+.charm-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid grey;
 }
 
 /* color1 #0511f2

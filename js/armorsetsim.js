@@ -1,5 +1,5 @@
 // Globals
-let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {}, charmList = {};
+let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {}, charmList = [];
 let armorsBySkill = null;
 let headArmor = {}, // Eventually condense this into a single object?
 chestArmor = {},
@@ -59,36 +59,93 @@ function initArmorSkillDropdown(data){
     dropdown.appendChild(newSkill);
   }
   // Create charm dropdowns
+  // ADD
   let addSkill1 = document.getElementById("add-skill1-label");
   let clonedDropdown = dropdown.cloneNode(true);
   clonedDropdown.id = "add-skill1";
-  clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
+  // clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
   addSkill1.appendChild(clonedDropdown);
 
   let addSkill2 = document.getElementById("add-skill2-label");
   clonedDropdown = dropdown.cloneNode(true);
   clonedDropdown.id = "add-skill2";
-  clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
+  // clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
   addSkill2.appendChild(clonedDropdown);
 
   let addSkill1Level = document.getElementById("add-level1-label");
   let newSelect = document.createElement("select");
   newSelect.id = "add-level1";
-  createLevelRange(newSelect, 3, 0);
+  createLevelRange(newSelect, 7, 0);
   addSkill1Level.appendChild(newSelect);
 
   let addSkill2Level = document.getElementById("add-level2-label");
   newSelect = document.createElement("select");
   newSelect.id = "add-level2";
-  createLevelRange(newSelect, 3, 0);
+  createLevelRange(newSelect, 7, 0);
   addSkill2Level.appendChild(newSelect);
+
+  let addSlot1Level = document.getElementById("add-slot1-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "add-slot1";
+  createLevelRange(newSelect, 3, 0);
+  addSlot1Level.appendChild(newSelect);
+
+  let addSlot2Level = document.getElementById("add-slot2-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "add-slot2";
+  createLevelRange(newSelect, 3, 0);
+  addSlot2Level.appendChild(newSelect);
+
+  let addSlot3Level = document.getElementById("add-slot3-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "add-slot3";
+  createLevelRange(newSelect, 3, 0);
+  addSlot3Level.appendChild(newSelect);
+
+  // EDIT
+  let editSkill1 = document.getElementById("edit-skill1-label");
+  clonedDropdown = dropdown.cloneNode(true);
+  clonedDropdown.id = "edit-skill1";
+  // clonedDropdown.onchange = function() {updateeditCharm(this.id, this.value)}
+  editSkill1.appendChild(clonedDropdown);
+
+  let editSkill2 = document.getElementById("edit-skill2-label");
+  clonedDropdown = dropdown.cloneNode(true);
+  clonedDropdown.id = "edit-skill2";
+  // clonedDropdown.onchange = function() {updateeditCharm(this.id, this.value)}
+  editSkill2.appendChild(clonedDropdown);
+
+  let editSkill1Level = document.getElementById("edit-level1-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "edit-level1";
+  createLevelRange(newSelect, 7, 0);
+  editSkill1Level.appendChild(newSelect);
+
+  let editSkill2Level = document.getElementById("edit-level2-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "edit-level2";
+  createLevelRange(newSelect, 7, 0);
+  editSkill2Level.appendChild(newSelect);
+
+  let editSlot1Level = document.getElementById("edit-slot1-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "edit-slot1";
+  createLevelRange(newSelect, 3, 0);
+  editSlot1Level.appendChild(newSelect);
+
+  let editSlot2Level = document.getElementById("edit-slot2-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "edit-slot2";
+  createLevelRange(newSelect, 3, 0);
+  editSlot2Level.appendChild(newSelect);
+
+  let editSlot3Level = document.getElementById("edit-slot3-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "edit-slot3";
+  createLevelRange(newSelect, 3, 0);
+  editSlot3Level.appendChild(newSelect);
   // Save data object for later use
   skillList = data;
-}
-
-function updateAddCharm(id, name){
-  console.log(id)
-  console.log(name)
 }
 
 // Initializes the decoration object
@@ -172,6 +229,19 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable){
   }
   counter++;
   div.appendChild(newArmorSet);
+}
+
+// Renders all charms
+function renderCharms(){
+  let div = document.getElementById("charms-list");
+  for(charm in charmList){
+    let newCharm = document.createElement("div");
+    newCharm.className = "charm-display";
+    let newIndex = document.createElement("p");
+    newIndex.innerText = charm;
+    let newSkill1 = document.createElement("p");
+    newSkill1.innerText = charmList[charm]["skill"]
+  }
 }
 
 // Clears resulting armor sets
@@ -304,11 +374,11 @@ function search(){
             }
 
             // Calculate decoration slots
-            for(let val in headArmor[head]["slots"]){ decoCount[val-1] += 1; }
-            for(let val in chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
-            for(let val in armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
-            for(let val in waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
-            for(let val in legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
+            for(let val of headArmor[head]["slots"]){ decoCount[val-1] += 1; }
+            for(let val of chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
+            for(let val of armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
+            for(let val of waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
+            for(let val of legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
 
             // Compare to required criteria
             let decoCopy = [...decoCount];
@@ -362,6 +432,47 @@ function search(){
   }
 }
 
+function addNewCharm(){
+  let sk1 = document.getElementById("add-skill1").value;
+  let sk2 = document.getElementById("add-skill2").value;
+  let sk1level = document.getElementById("add-level1").value;
+  let sk2level = document.getElementById("add-level2").value;console.log(sk1)
+  let sl1 = parseInt(document.getElementById("add-slot1").value); //parse might be unnecessary
+  let sl2 = parseInt(document.getElementById("add-slot2").value); //but just to be safe
+  let sl3 = parseInt(document.getElementById("add-slot3").value);
+  let newCharm = {
+    "skills": [],
+    "slots": [],
+    "defense": 0
+  };
+  if(sk1 != "" && sk1level>0){
+    let newSkill = {
+      "name": sk1,
+      "level": sk1level
+    }
+    newCharm["skills"].push(newSkill);
+  }
+  if(sk2 != "" && sk2level>0){
+    let newSkill = {
+      "name": sk2,
+      "level": sk2level
+    }
+    newCharm["skills"].push(newSkill);
+  }
+  if(sl1>0){
+    newCharm["slots"].push(sl1);
+  }
+  if(sl2>0){
+    newCharm["slots"].push(sl2);
+  }
+  if(sl3>0){
+    newCharm["slots"].push(sl3);
+  }
+  charmList.push(newCharm);
+  console.log(charmList)
+}
+
+// Toggles visibility of charm info
 function toggleCharmTab(){
   // Flip flag
   charmsOpen = !charmsOpen;    
