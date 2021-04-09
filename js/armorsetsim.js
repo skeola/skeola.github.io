@@ -371,7 +371,8 @@ function search(){
 
   // Add an empty charm to the list
   charmList.push(tempCharm);
-  
+  let baseDecos = getWeaponDecos();
+
   // Brute force search every combination lol hopefully I find a better way later
   let count = 0;
   for(let head of matchingPieceList["head"].keys()){
@@ -382,7 +383,7 @@ function search(){
             for(let charm in charmList){
               // Calculate the total skills this set will give
               let currentSkills = {};
-              let decoCount = getWeaponDecos();
+              decoCount = [...baseDecos];
 
               for(let skill of headArmor[head]["skills"]){
                 if(skill["name"] in currentSkills){
