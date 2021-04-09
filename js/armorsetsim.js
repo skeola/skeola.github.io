@@ -11,7 +11,7 @@ let counter = 0;
 let searchCap = 100;
 
 // Flags
-let inclSlotArmors = false, useDeco = false;
+let inclSlotArmors = false, useDeco = false, charmsOpen = false;
 
 // Init
 initArmorSkills();
@@ -331,6 +331,25 @@ function search(){
         }
       }
     }
+  }
+}
+
+function toggleCharmTab(){
+  // Flip flag
+  charmsOpen = !charmsOpen;    
+
+  let toggleButton = document.getElementById("toggleCharm");
+  let resultsSec = document.getElementById("results-section");
+  let charmSec = document.getElementById("charms-section");
+  // Render accordingly
+  if(charmsOpen){
+    // toggleButton.innerText = "Hide";
+    resultsSec.style.display = "none";
+    charmSec.style.display = "flex";
+  } else{
+    // toggleButton.innerText = "Show";
+    resultsSec.style.display = "flex";
+    charmSec.style.display = "none";
   }
 }
 

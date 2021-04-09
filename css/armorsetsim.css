@@ -24,7 +24,7 @@ main {
 }
 
 .option-section {
-  flex: 2;
+  flex: 1;
   border: 3px solid black;
   border-radius: 10px;
   margin: 10px;
@@ -32,17 +32,9 @@ main {
 }
 
 .title-section {
-  flex: 9;
+  flex: 5;
   display: flex;
   justify-content: center;
-}
-
-.tab-section {
-  flex: 1;
-  border: 3px solid black;
-  border-radius: 10px;
-  margin: 10px;
-  background-color: whitesmoke;
 }
 
 .simulator-section {
@@ -71,6 +63,13 @@ main {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+}
+
+.charms-section {
+  flex: 5;
+  flex-direction: column;
+  overflow-y: hidden;
+  display: none;
 }
 
 .title {
@@ -172,6 +171,12 @@ main {
 
 .options{
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.options-col{
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -187,6 +192,23 @@ main {
 .option-dropdown-text {
   text-indent: 4px;
 }
+
+.charms-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 7px;
+}
+
+.charms {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  border-top: 2px solid black;
+}
+
 /* color1 #0511f2
    color2 #bf9004
 */

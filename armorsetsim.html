@@ -16,58 +16,33 @@
           <div class="option-section">
             <p class="main-text" style="text-decoration: underline;">Options</p>
             <div class="options">
-              <div class="option">
-                <input type="checkbox" id="useDeco" name="options" onclick="pressCheckbox(this.id)">
-                <label for="useDeco" title="Use potential decorations towards criteria">Use Decorations</label>
+              <div class="options-col">
+                <div class="option">
+                  <input type="checkbox" id="useDeco" name="options" onclick="pressCheckbox(this.id)">
+                  <label for="useDeco" title="Use potential decorations towards criteria">Use Decorations</label>
+                </div>
+                <div class="option">
+                  <input type="checkbox" id="inclSlotArmors" name="options" onclick="pressCheckbox(this.id)">
+                  <label for="inclSlotArmors" title="Includes pieces that have slots and no skills (eg. Vaik Chest)">Incl. Pure Slots</label>
+                </div>
+                <div class="option">
+                  <select name="result-cap" id="result-cap" onchange="updateResultCap(this)">
+                    <option value="100" selected>100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="10000">10000</option>
+                  </select>
+                  <p class="option-dropdown-text" title="Stops searching after results hit the cap">Result Cap</p>
+                </div>
               </div>
-              <div class="option">
-                <input type="checkbox" id="inclSlotArmors" name="options" onclick="pressCheckbox(this.id)">
-                <label for="inclSlotArmors" title="Includes pieces that have slots and no skills (eg. Vaik Chest)">Incl. Pure Slots</label>
-              </div>
-              <!-- <div class="option">
-                <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
-                <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
-              </div> -->
-              <div class="option">
-                <select name="result-cap" id="result-cap" onchange="updateResultCap(this)">
-                  <option value="100" selected>100</option>
-                  <option value="500">500</option>
-                  <option value="1000">1000</option>
-                  <option value="10000">10000</option>
-                </select>
-                <p class="option-dropdown-text" title="Stops searching after results hit the cap">Result Cap</p>
+              <div class="options-col">
+                <button type="button" id="toggleCharm" onclick="toggleCharmTab()">Toggle Charms</button>
               </div>
             </div>
           </div>
           <div class="title-section">
             <p class="title">MH:Rise Armor Set Simulator</p>
             <!-- <p class="title-sub">Calculate the perfect set for all your skill set needs!</p> -->
-          </div>
-          <div class="tab-section">
-            <p class="main-text" style="text-decoration: underline;">Charms/Slots</p>
-            <div class="options">
-              <!-- <div class="option">
-                <input type="checkbox" id="useDeco" name="options" onclick="pressCheckbox(this.id)">
-                <label for="useDeco" title="Use potential decorations towards criteria">Use Decorations</label>
-              </div>
-              <div class="option">
-                <input type="checkbox" id="inclSlotArmors" name="options" onclick="pressCheckbox(this.id)">
-                <label for="inclSlotArmors" title="Includes pieces that have slots and no skills (eg. Vaik Chest)">Incl. Pure Slots</label>
-              </div>
-              <div class="option">
-                <input type="checkbox" id="maxDef" name="options" onclick="pressCheckbox(this.id)">
-                <label for="maxDef" title="Maximize defense value">Maximize Defense</label>
-              </div>
-              <div class="option">
-                <select name="result-cap" id="result-cap" onchange="updateResultCap(this)">
-                  <option value="100" selected>100</option>
-                  <option value="500">500</option>
-                  <option value="1000">1000</option>
-                  <option value="10000">10000</option>
-                </select>
-                <p class="option-dropdown-text" title="Stops searching after results hit the cap">Result Cap</p>
-              </div> -->
-            </div>
           </div>
         </div>
         <div class="simulator-section">
@@ -85,7 +60,7 @@
             </div>
             <button class="search-button" type="button" onclick="search()">Search</button>
           </div>
-          <div class="results-section">
+          <div class="results-section" id="results-section">
             <div class="results-header">
               <p class="results-header-text">Head</p>
               <p class="results-header-text">Chest</p>
@@ -95,6 +70,14 @@
               <p class="results-header-text">Deco Available</p>
             </div>
             <div class="results" id="results">
+
+            </div>
+          </div>
+          <div class="charms-section" id="charms-section">
+            <div class="charms-header">
+              <p class="results-header-text">Charms Options</p>
+            </div>
+            <div class="charms" id="charms">
 
             </div>
           </div>
