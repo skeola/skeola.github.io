@@ -14,7 +14,7 @@
       <div class="flex-container">
         <div class="header-section">
           <div class="option-section">
-            <p class="main-text" style="text-decoration: underline;">Options</p>
+            <p class="header-text">Options</p>
             <div class="options">
               <div class="options-col">
                 <div class="option">
@@ -48,11 +48,11 @@
         <div class="simulator-section">
           <div class="search-section">
             <div class="search-header">
-              <p class="search-header-text">Skills</p>
+              <p class="header-text">Skills</p>
             </div>
             <div class="search-bar">
               <select name="skills" id="skill-select">
-                <option value="">--choose a skill--</option>
+                <option value="" selected disabled>--choose a skill--</option>
               </select>
               <button type="button" onclick="addSkill()">Add</button>
             </div>
@@ -62,12 +62,12 @@
           </div>
           <div class="results-section" id="results-section">
             <div class="results-header">
-              <p class="results-header-text">Head</p>
-              <p class="results-header-text">Chest</p>
-              <p class="results-header-text">Arms</p>
-              <p class="results-header-text">Waist</p>
-              <p class="results-header-text">Legs</p>
-              <p class="results-header-text">Deco Available</p>
+              <p class="header-text">Head</p>
+              <p class="header-text">Chest</p>
+              <p class="header-text">Arms</p>
+              <p class="header-text">Waist</p>
+              <p class="header-text">Legs</p>
+              <p class="header-text">Deco Available</p>
             </div>
             <div class="results" id="results">
 
@@ -75,23 +75,70 @@
           </div>
           <div class="charms-section" id="charms-section">
             <div class="charms-header">
-              <p class="results-header-text">Charms</p>
+              <p class="header-text">Charms</p>
             </div>
             <div class="charms-container" id="charms-container">
               <div class="charms">
-                <div class="charms-add">
-                  <p>add charms here</p>
+                <div class="charms-edit">
+                  <div class="charms-add">
+                    <p class="subheader-text">Add New Charm</p>
+                    <div class="charm-config">
+                      <div class="charm-config-col">
+                        <label for="add-skill1" id="add-skill1-label" class="charm-config-line">Skill 1
+                        </label>
+                        <label for="add-level1" id="add-level1-label" class="charm-config-line">Level
+                        </label>
+                        <label for="add-skill2" id="add-skill2-label" class="charm-config-line">Skill 2
+                        </label>
+                        <label for="add-level2" id="add-level2-label" class="charm-config-line">Level
+                        </label>
+                      </div>
+                      <div class="charm-config-col">
+                        <label for="add-slot1" id="add-slot1-label">Slot 1
+                        </label>
+                        <label for="add-slot2" id="add-slot2-label">Slot 2
+                        </label>
+                        <label for="add-slot3" id="add-slot3-label">Slot 3
+                        </label>
+                        <button type="button" id="add-charm-button">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="charms-edit-existing">
+                    <p class="subheader-text">Edit Charm</p>
+                    <div class="charm-config">
+                      <div class="charm-config-col">
+                        <label for="edit-skill1" id="edit-skill1-label" class="charm-config-line">Skill 1
+                        </label>
+                        <label for="edit-level1" id="edit-level1-label" class="charm-config-line">Level
+                        </label>
+                        <label for="edit-skill2" id="edit-skill2-label" class="charm-config-line">Skill 2
+                        </label>
+                        <label for="edit-level2" id="edit-level2-label" class="charm-config-line">Level
+                        </label>
+                      </div>
+                      <div class="charm-config-col">
+                        <label for="edit-slot1" id="edit-slot1-label">Slot 1
+                        </label>
+                        <label for="edit-slot2" id="edit-slot2-label">Slot 2
+                        </label>
+                        <label for="edit-slot3" id="edit-slot3-label">Slot 3
+                        </label>
+                        <button type="button" id="edit-charm-button">Add</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="charms-imported">
-                  <p>see charms here</p>
+                  <p class="subheader-text">Current Charm List</p>
                 </div>
               </div>
               <div class="charms-io">
                 <div class="charms-port">
-                  <p>Import Charms:</p>
+                  <p class="subheader-text">Import Charms:</p>
                 </div>
                 <div class="charms-port">
-                  <p>Export Charms:</p>
+                  <p class="subheader-text">Export Charms:</p>
                 </div>
               </div>
             </div>

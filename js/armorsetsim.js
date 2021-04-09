@@ -18,7 +18,6 @@ initArmorSkills();
 initArmorPieces();
 initDecorations();
 
-
 ///////////////////////////////
 // -------INITIALIZERS-------//
 ///////////////////////////////
@@ -49,18 +48,47 @@ async function initArmorPieces(){
   .then(data => legsArmor = data);
 }
 
-// Initializes the skillList and skill list dropdown
+// Initializes the skillList and skill list dropdowns
 function initArmorSkillDropdown(data){
   let dropdown = document.getElementById("skill-select");
   for(let sk of Object.keys(data).sort()){
     // Create dropdown option
     let newSkill = document.createElement("option");
     newSkill.innerText = sk;
-    newSkill.value = data[sk];
+    newSkill.value = sk;
     dropdown.appendChild(newSkill);
   }
+  // Create charm dropdowns
+  let addSkill1 = document.getElementById("add-skill1-label");
+  let clonedDropdown = dropdown.cloneNode(true);
+  clonedDropdown.id = "add-skill1";
+  clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
+  addSkill1.appendChild(clonedDropdown);
+
+  let addSkill2 = document.getElementById("add-skill2-label");
+  clonedDropdown = dropdown.cloneNode(true);
+  clonedDropdown.id = "add-skill2";
+  clonedDropdown.onchange = function() {updateAddCharm(this.id, this.value)}
+  addSkill2.appendChild(clonedDropdown);
+
+  let addSkill1Level = document.getElementById("add-level1-label");
+  let newSelect = document.createElement("select");
+  newSelect.id = "add-level1";
+  createLevelRange(newSelect, 3, 0);
+  addSkill1Level.appendChild(newSelect);
+
+  let addSkill2Level = document.getElementById("add-level2-label");
+  newSelect = document.createElement("select");
+  newSelect.id = "add-level2";
+  createLevelRange(newSelect, 3, 0);
+  addSkill2Level.appendChild(newSelect);
   // Save data object for later use
   skillList = data;
+}
+
+function updateAddCharm(id, name){
+  console.log(id)
+  console.log(name)
 }
 
 // Initializes the decoration object
