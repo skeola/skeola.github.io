@@ -225,6 +225,8 @@ main {
 .charms-port {
   flex: 1;
   border-top: 2px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
 .charms-edit {
@@ -285,6 +287,13 @@ main {
   flex-direction: row;
   justify-content: space-around;
   border-bottom: 1px solid grey;
+}
+
+textarea {
+  flex: 6;
+  box-sizing: border-box;
+  resize: none;
+  margin: 10px;
 }
 
 /* color1 #0511f2

@@ -23,7 +23,6 @@ let tempCharm = {
   "slots": [],
   "defense": 0
 }
-charmList.push(tempCharm);
 renderCharms();
 
 ///////////////////////////////
@@ -370,6 +369,9 @@ function search(){
     }
   }
 
+  // Add an empty charm to the list
+  charmList.push(tempCharm);
+
   // Brute force search every combination lol hopefully I find a better way later
   let count = 0;
   for(let head of matchingPieceList["head"].keys()){
@@ -422,7 +424,6 @@ function search(){
                   currentSkills[skill["name"]] = skill["level"];
                 }
               }
-
               for(let skill of charmList[charm]["skills"]){
                 if(skill["name"] in currentSkills){
                   currentSkills[skill["name"]] += skill["level"];
@@ -483,7 +484,14 @@ function search(){
                   window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
                   return;
                 }
-                renderArmorSet([head, chest, arms, waist, legs, charm], decoCount, decoCopy);
+                console.log("charm = "+charm+typeof(charm))
+                console.log("charmList.length = "+charmList.length+typeof(charmList.length))
+                if(charm == charmList.length-1) {
+                  charmFormat = "---";
+                } else{
+                  charmFormat = parseInt(charm)+1;
+                }
+                renderArmorSet([head, chest, arms, waist, legs, charmFormat], decoCount, decoCopy);
               }
             }
           }
@@ -491,6 +499,9 @@ function search(){
       }
     }
   }
+
+  // Remove empty charm from the list
+  charmList.pop();
 }
 
 // Adds the new charm to the charm list
@@ -534,9 +545,34 @@ function addNewCharm(){
   renderCharms();
 }
 
+// Export charms to a JSON
 function exportCharms(){
   let expString = JSON.stringify(charmList);
-  console.log(expString)
+  let box = document.getElementById("export");
+  box.textContent = expString;
+}
+
+// Import charms from text as JSON
+function importCharms(){
+  let textArea = document.getElementById("import");
+  if(textArea.value == ""){ return; }
+  try{
+    let parsedText = JSON.parse(textArea.value);
+    for(let charm of parsedText){
+      console.log(charm)
+      if(!charm["skills"]){
+        throw "Missing skills"
+      }
+      if(!charm["slots"]){
+        throw "Missing slots"
+      }
+      charmList.push(charm);
+    }
+    renderCharms();
+    textArea.value = "";
+  } catch(err){
+    window.alert("Invalid JSON string!\n"+err)
+  }
 }
 
 // Toggles visibility of charm info

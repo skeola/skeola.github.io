@@ -18,11 +18,11 @@
             <div class="options">
               <div class="options-col">
                 <div class="option">
-                  <input type="checkbox" id="useDeco" name="options" onclick="pressCheckbox(this.id)">
+                  <input type="checkbox" id="useDeco" autocomplete="off" name="options" onclick="pressCheckbox(this.id)">
                   <label for="useDeco" title="Use potential decorations towards criteria">Use Decorations</label>
                 </div>
                 <div class="option">
-                  <input type="checkbox" id="inclSlotArmors" name="options" onclick="pressCheckbox(this.id)">
+                  <input type="checkbox" id="inclSlotArmors" autocomplete="off" name="options" onclick="pressCheckbox(this.id)">
                   <label for="inclSlotArmors" title="Includes pieces that have slots and no skills (eg. Vaik Chest)">Incl. Pure Slots</label>
                 </div>
                 <div class="option">
@@ -139,11 +139,13 @@
               </div>
               <div class="charms-io">
                 <div class="charms-port">
-                  <p class="subheader-text">Import Charms</p>
-                  <input type="text" id="charms-import">
+                  <p class="subheader-text" style="flex: 1;">Import Charms</p>
+                  <textarea id="import" name="import" rows=15 cols= 40 autocomplete="off"></textarea>
+                  <button type="button" onclick="importCharms()">Import</button>
                 </div>
                 <div class="charms-port">
-                  <p class="subheader-text">Export Charms</p>
+                  <p class="subheader-text" style="flex: 1;">Export Charms</p>
+                  <textarea id="export" name="export" rows=15 cols= 40></textarea>
                   <button type="button" onclick="exportCharms()">Export</button>
                 </div>
               </div>
