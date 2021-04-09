@@ -17,6 +17,14 @@ let inclSlotArmors = false, useDeco = false, charmsOpen = false;
 initArmorSkills();
 initArmorPieces();
 initDecorations();
+// Create an empty decoration
+let tempCharm = {
+  "skills": [],
+  "slots": [],
+  "defense": 0
+}
+charmList.push(tempCharm);
+renderCharms();
 
 ///////////////////////////////
 // -------INITIALIZERS-------//
@@ -201,12 +209,14 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable){
   let newArms = document.createElement("p");
   let newWaist = document.createElement("p");
   let newLegs = document.createElement("p");
+  let newCharm = document.createElement("p");
   let newDeco = document.createElement("p");
   newHead.innerText = armors[0];
   newChest.innerText = armors[1];
   newArms.innerText = armors[2];
   newWaist.innerText = armors[3];
   newLegs.innerText = armors[4];
+  newCharm.innerText = armors[5];
   newDeco.innerText = decosAvailable(slotsTotal, slotsAvailable);
   newHead.className = "armor-piece";
   newChest.className = "armor-piece";
@@ -214,12 +224,14 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable){
   newWaist.className = "armor-piece";
   newLegs.className = "armor-piece";
   newDeco.className = "armor-piece";
+  newCharm.className = "armor-piece";
   newArmorSet.appendChild(newHead);
   newArmorSet.appendChild(newChest);
   newArmorSet.appendChild(newArms);
   newArmorSet.appendChild(newWaist);
   newArmorSet.appendChild(newLegs);
   newArmorSet.appendChild(newDeco);
+  newArmorSet.appendChild(newCharm);
   // Alternate background colors
   if(counter%2==0){
     newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
@@ -233,14 +245,51 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable){
 
 // Renders all charms
 function renderCharms(){
+  // Remove the old list
   let div = document.getElementById("charms-list");
+  while(div.firstChild){
+    div.removeChild(div.firstChild);
+  }
+
+  // Create each charm
   for(charm in charmList){
     let newCharm = document.createElement("div");
     newCharm.className = "charm-display";
+    // Index
     let newIndex = document.createElement("p");
-    newIndex.innerText = charm;
+    newIndex.innerText = parseInt(charm)+1;
+    newIndex.style.flex = "1";
+    newCharm.appendChild(newIndex);
+
+    // Skill 1
     let newSkill1 = document.createElement("p");
-    newSkill1.innerText = charmList[charm]["skill"]
+    newSkill1.style.flex = "3";
+    if(charmList[charm]["skills"][0]){
+      newSkill1.innerText = charmList[charm]["skills"][0]["name"] + " - Level " + charmList[charm]["skills"][0]["level"]
+    } else { newSkill1.innerText = "---"}
+    newCharm.appendChild(newSkill1);
+
+    // Skill 2
+    let newSkill2 = document.createElement("p");
+    newSkill2.style.flex = "3";
+    if(charmList[charm]["skills"][1]){
+      newSkill2.innerText = charmList[charm]["skills"][1]["name"] + " - Level " + charmList[charm]["skills"][0]["level"]
+    } else { newSkill2.innerText = "---"}
+    newCharm.appendChild(newSkill2);
+
+    // Slots
+    let decos = [0,0,0];
+    for(let lev in charmList[charm]["slots"]){
+      decos[lev-1] += 1;
+    }
+    for(let i=0; i<3; i++){
+      let newSlot = document.createElement("p");
+      newSlot.style.flex = "1";
+      newSlot.innerText = decos[i];
+      newCharm.appendChild(newSlot);
+    }
+    // Append new charm to the div
+    div.appendChild(newCharm);
   }
 }
 
@@ -328,102 +377,114 @@ function search(){
       for(let arms of matchingPieceList["arms"].keys()){
         for(let waist of matchingPieceList["waist"].keys()){
           for(let legs of matchingPieceList["legs"].keys()){
-            // Calculate the total skills this set will give
-            let currentSkills = {};
-            let decoCount = [0, 0, 0];
+            for(let charm in charmList){
+              // Calculate the total skills this set will give
+              let currentSkills = {};
+              let decoCount = [0, 0, 0];
 
-            for(let skill of headArmor[head]["skills"]){
-              if(skill["name"] in currentSkills){
-                currentSkills[skill["name"]] += skill["level"];
-              }
-              else{
-                currentSkills[skill["name"]] = skill["level"];
-              }
-            }
-            for(let skill of chestArmor[chest]["skills"]){
-              if(skill["name"] in currentSkills){
-                currentSkills[skill["name"]] += skill["level"];
-              }
-              else{
-                currentSkills[skill["name"]] = skill["level"];
-              }
-            }
-            for(let skill of armsArmor[arms]["skills"]){
-              if(skill["name"] in currentSkills){
-                currentSkills[skill["name"]] += skill["level"];
-              }
-              else{
-                currentSkills[skill["name"]] = skill["level"];
-              }
-            }
-            for(let skill of waistArmor[waist]["skills"]){
-              if(skill["name"] in currentSkills){
-                currentSkills[skill["name"]] += skill["level"];
-              }
-              else{
-                currentSkills[skill["name"]] = skill["level"];
-              }
-            }
-            for(let skill of legsArmor[legs]["skills"]){
-              if(skill["name"] in currentSkills){
-                currentSkills[skill["name"]] += skill["level"];
-              }
-              else{
-                currentSkills[skill["name"]] = skill["level"];
-              }
-            }
-
-            // Calculate decoration slots
-            for(let val of headArmor[head]["slots"]){ decoCount[val-1] += 1; }
-            for(let val of chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
-            for(let val of armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
-            for(let val of waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
-            for(let val of legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
-
-            // Compare to required criteria
-            let decoCopy = [...decoCount];
-            let success = true;
-            for(let skill of Object.keys(selectedSkills)){
-              // If skill was set to 0 then it is no longer needed
-              if(selectedSkills[skill] == 0){ continue; }
-
-              // Runs when the current skills are not satisfactory
-              if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
-                // Runs when decorations can fill the deficit
-                if(useDeco && skill in decoList){
-                  let deficit = selectedSkills[skill] - currentSkills[skill];
-                  let deficitFilled = false;
-
-                  // Check if there are open slots available starting with the 'cheapest'
-                  for(let cost=decoList[skill]; cost<=3; cost++){
-                    // Slot can be filled
-                    if(deficit <= decoCopy[cost-1]){
-                      decoCopy[cost-1] -= deficit;
-                      deficitFilled = true;
-                      break;
-                    }
-                  }
-                  // Success check for this skill
-                  if(!deficitFilled){
-                    success = false;
-                    break; 
-                  }
-                } 
-                // Runs when decorations cannot be used
+              for(let skill of headArmor[head]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
                 else{
-                  success = false;
-                  break;
+                  currentSkills[skill["name"]] = skill["level"];
                 }
               }
-            }
-            
-            if(success == true){
-              count += 1;
-              if(count>searchCap){
-                window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
-                return;
+              for(let skill of chestArmor[chest]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
+                else{
+                  currentSkills[skill["name"]] = skill["level"];
+                }
               }
-              renderArmorSet([head, chest, arms, waist, legs], decoCount, decoCopy);
+              for(let skill of armsArmor[arms]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
+                else{
+                  currentSkills[skill["name"]] = skill["level"];
+                }
+              }
+              for(let skill of waistArmor[waist]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
+                else{
+                  currentSkills[skill["name"]] = skill["level"];
+                }
+              }
+              for(let skill of legsArmor[legs]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
+                else{
+                  currentSkills[skill["name"]] = skill["level"];
+                }
+              }
+
+              for(let skill of charmList[charm]["skills"]){
+                if(skill["name"] in currentSkills){
+                  currentSkills[skill["name"]] += skill["level"];
+                }
+                else{
+                  currentSkills[skill["name"]] = skill["level"];
+                }
+              }
+
+              // Calculate decoration slots
+              for(let val of headArmor[head]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of charmList[charm]["slots"]){ decoCount[val-1] += 1; }
+
+              // Compare to required criteria
+              let decoCopy = [...decoCount];
+              let success = true;
+              for(let skill of Object.keys(selectedSkills)){
+                // If skill was set to 0 then it is no longer needed
+                if(selectedSkills[skill] == 0){ continue; }
+
+                // Runs when the current skills are not satisfactory
+                if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
+                  // Runs when decorations can fill the deficit
+                  if(useDeco && skill in decoList){
+                    let deficit = selectedSkills[skill] - currentSkills[skill];
+                    let deficitFilled = false;
+
+                    // Check if there are open slots available starting with the 'cheapest'
+                    for(let cost=decoList[skill]; cost<=3; cost++){
+                      // Slot can be filled
+                      if(deficit <= decoCopy[cost-1]){
+                        decoCopy[cost-1] -= deficit;
+                        deficitFilled = true;
+                        break;
+                      }
+                    }
+                    // Success check for this skill
+                    if(!deficitFilled){
+                      success = false;
+                      break; 
+                    }
+                  } 
+                  // Runs when decorations cannot be used
+                  else{
+                    success = false;
+                    break;
+                  }
+                }
+              }
+              
+              if(success == true){
+                count += 1;
+                if(count>searchCap){
+                  window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
+                  return;
+                }
+                renderArmorSet([head, chest, arms, waist, legs, charm], decoCount, decoCopy);
+              }
             }
           }
         }
@@ -432,6 +493,7 @@ function search(){
   }
 }
 
+// Adds the new charm to the charm list
 function addNewCharm(){
   let sk1 = document.getElementById("add-skill1").value;
   let sk2 = document.getElementById("add-skill2").value;
@@ -469,7 +531,12 @@ function addNewCharm(){
     newCharm["slots"].push(sl3);
   }
   charmList.push(newCharm);
-  console.log(charmList)
+  renderCharms();
+}
+
+function exportCharms(){
+  let expString = JSON.stringify(charmList);
+  console.log(expString)
 }
 
 // Toggles visibility of charm info
