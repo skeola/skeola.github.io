@@ -371,7 +371,7 @@ function search(){
 
   // Add an empty charm to the list
   charmList.push(tempCharm);
-
+  
   // Brute force search every combination lol hopefully I find a better way later
   let count = 0;
   for(let head of matchingPieceList["head"].keys()){
@@ -382,7 +382,7 @@ function search(){
             for(let charm in charmList){
               // Calculate the total skills this set will give
               let currentSkills = {};
-              let decoCount = [0, 0, 0];
+              let decoCount = getWeaponDecos();
 
               for(let skill of headArmor[head]["skills"]){
                 if(skill["name"] in currentSkills){
@@ -484,8 +484,6 @@ function search(){
                   window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
                   return;
                 }
-                console.log("charm = "+charm+typeof(charm))
-                console.log("charmList.length = "+charmList.length+typeof(charmList.length))
                 if(charm == charmList.length-1) {
                   charmFormat = "---";
                 } else{
@@ -610,6 +608,19 @@ function pressCheckbox(id){
   }
 }
 
+// Increments the slot level to from 0-3 (cyclicly)
+function incrementSlot(elem){
+  if(elem.innerText == "0"){
+    elem.innerText = "1";
+  } else if(elem.innerText == "1"){
+    elem.innerText = "2";
+  } else if(elem.innerText == "2"){
+    elem.innerText = "3";
+  } else if(elem.innerText == "3"){
+    elem.innerText = "0";
+  }
+}
+
 /////////////////////////
 // ------HELPERS------ //
 /////////////////////////
@@ -692,4 +703,15 @@ function decosAvailable(slotsTotal, slotsAvailable){
   str += slotsAvailable[1] + "/" + slotsTotal[1] + ", 3 - ";  
   str += slotsAvailable[2] + "/" + slotsTotal[2]
   return str;
+}
+
+function getWeaponDecos(){
+  let btns = document.getElementsByName("weaponSlots");
+  let ret = [0,0,0];
+  for(let btn of btns){
+    if(btn.innerText != "0"){
+      ret[parseInt(btn.innerText)-1] += 1;
+    }
+  }
+  return ret;
 }
