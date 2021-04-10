@@ -199,16 +199,23 @@ function renderSelectedSkills() {
   }
 }
 
+function renderArmorSets(){
+  // Render message if no results
+  let msg = document.getElementById("no-results");
+  if(armorList.length == 0){
+    msg.style.display = "flex";
+  } else{
+    msg.style.display = "none";
+  }
+
+  for(let set of armorList){
+    renderArmorSet(set["pieces"], set["totalSlots"], set["emptySlots"], set["charmIndex"])
+  }
+}
+
 // Renders a set of armors and decoration slots
 // Needs to be passed a set of armor names and decoration info
-function renderArmorSet(armors, slotsTotal, slotsAvailable){
-  // let msg = document.getElementById("no-results");
-  // console.log(msg)
-  // if(armorList.length == 0){
-  //   msg.style.display = "inline";
-  // } else{
-  //   msg.style.display = "none";
-  // }
+function renderArmorSet(armors, slotsTotal, slotsAvailable, charmIndex){
   let div = document.getElementById("results");
   let newArmorSet = document.createElement("div");
   newArmorSet.className = "armor-set";
@@ -224,7 +231,7 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable){
   newArms.innerText = armors[2];
   newWaist.innerText = armors[3];
   newLegs.innerText = armors[4];
-  newCharm.innerText = armors[5];
+  newCharm.innerText = charmIndex;
   newDeco.innerText = decosAvailable(slotsTotal, slotsAvailable);
   newHead.className = "armor-piece";
   newChest.className = "armor-piece";
@@ -302,14 +309,13 @@ function renderCharms(){
 }
 
 // Clears resulting armor sets
-function clearResults(){
+function clearOldResults(){
   // Clear rendered sets
-  let res = document.getElementById("results");
-  while(res.firstChild){
-    res.removeChild(res.firstChild);
+  let children = document.getElementsByClassName("armor-set");
+  while(children.length > 0){
+    children[0].remove();
   }
-  // Clear array
-  resultsList = {};
+  armorList = [];
 }
 
 /////////////////////////
@@ -339,11 +345,11 @@ function search(){
   // If this is the first search, we initialize armorsBySkill
   if(armorsBySkill == null){ setABS(); }
 
-  // Reset results columns
-  clearResults();
-
   // Init sets for matching armor piece names
   let matchingPieceList = getMatchingPieces();
+
+  // Clear old results
+  clearOldResults();
 
   // Add an empty charm to the list
   charmList.push(tempCharm);
@@ -492,11 +498,13 @@ function search(){
                   return;
                 }
                 if(charm == charmList.length-1) {
-                  charmFormat = "---";
+                  newSet["charmIndex"] = "---";
                 } else{
-                  charmFormat = parseInt(charm)+1;
+                  newSet["charmIndex"] = parseInt(charm)+1;
                 }
-                renderArmorSet([head, chest, arms, waist, legs, charmFormat], newSet["totalSlots"], decoCopy);
+                newSet["pieces"] = [head, chest, arms, waist, legs];
+                newSet["emptySlots"] = decoCopy;
+                armorList.push(newSet);
               }
             }
           }
@@ -504,6 +512,7 @@ function search(){
       }
     }
   }
+  renderArmorSets();
 
   // Remove empty charm from the list
   charmList.pop();
@@ -514,7 +523,7 @@ function addNewCharm(){
   let sk1 = document.getElementById("add-skill1").value;
   let sk2 = document.getElementById("add-skill2").value;
   let sk1level = document.getElementById("add-level1").value;
-  let sk2level = document.getElementById("add-level2").value;console.log(sk1)
+  let sk2level = document.getElementById("add-level2").value;
   let sl1 = parseInt(document.getElementById("add-slot1").value); //parse might be unnecessary
   let sl2 = parseInt(document.getElementById("add-slot2").value); //but just to be safe
   let sl3 = parseInt(document.getElementById("add-slot3").value);
@@ -564,7 +573,6 @@ function importCharms(){
   try{
     let parsedText = JSON.parse(textArea.value);
     for(let charm of parsedText){
-      console.log(charm)
       if(!charm["skills"]){
         throw "Missing skills"
       }
@@ -762,27 +770,39 @@ function getMatchingPieces(){
   
   // Add each required skill's pieces to the set by name
   // For each armor type (head, chest, ...)
+  let realSearch = false;
   for(let key of Object.keys(ret)){
     // Add placeholder item (imitates an empty/unneeded piece)
-    ret[key].add("---");
-    // Include slot-only armors if checked
-    if(inclSlotArmors){
-      ret["head"].add("Skull")
-      ret["chest"].add("Vaik");
-      ret["arms"].add("Jyura");
-      ret["waist"].add("Chrome Metal");
-      ret["legs"].add("Arzuros");
-    }
-  
+
     // For each armor skill in this armor piece
     for(let skill of Object.keys(selectedSkills)){
       // Check if the skill level has been set to 0
-      if(selectedSkills[skill] != 0){
+      if(selectedSkills[skill] != "0"){
+        realSearch = true;
         // For each entry in the list of armor names
         for(let name of armorsBySkill[key][skill]){
           ret[key].add(name)
         }
       }
+    }
+
+    if(!realSearch){
+      return ret;
+    } else{
+      ret["head"].add("---")
+      ret["chest"].add("---");
+      ret["arms"].add("---");
+      ret["waist"].add("---");
+      ret["legs"].add("---");
+    }
+
+    // Include slot-only armors if checked
+    if(inclSlotArmors && realSearch){
+      ret["head"].add("Skull")
+      ret["chest"].add("Vaik");
+      ret["arms"].add("Jyura");
+      ret["waist"].add("Chrome Metal");
+      ret["legs"].add("Arzuros");
     }
   }
 
