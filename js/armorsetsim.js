@@ -181,7 +181,7 @@ function renderSelectedSkills() {
   for(let name of Object.keys(selectedSkills)){
     // Create new skill div container
     let newSkill = document.createElement("div");
-    newSkill.className = "selected-skill";
+    newSkill.className = "skill";
     let newSkillText = document.createElement("p");
     newSkillText.innerText = name;
 
@@ -257,15 +257,9 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable, index){
   buttonWrap.appendChild(detailButton);
   newArmorSet.appendChild(buttonWrap);
 
-  // Set alternating background color
-  if(counter%2==0){
-    newArmorSet.style.backgroundColor = "rgb(255, 199, 248, 0.15)";
-    // newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
-  }
-  else{
-    newArmorSet.style.backgroundColor = "rgb(255, 165, 243, 0.15)";
-    // newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.1)";
-  }
+  newArmorSet.style.backgroundColor = getAlternatingColor();
+  // newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
+
   counter++;
   div.appendChild(newArmorSet);
 }
@@ -320,6 +314,28 @@ function renderCharms(){
   }
 }
 
+function renderArmorDetails(index){
+  // Open the armor tab
+  toggleArmorTab();
+
+  // Clear the old set details and render the new one
+  clearSetDetails();
+  renderSetDetails(index);
+}
+
+function renderSetDetails(index){
+  let set = armorList[parseInt(index)];
+  // Sort skills and decorations
+  let skillScroll = document.getElementById("skills-col");
+  for(let skill of Object.keys(set["skills"]).sort()){
+    skillScroll.appendChild(createSkillPair(skill, set["skills"][skill]))
+  }
+  let decoScroll = document.getElementById("deco-col");
+  for(let skill of Object.keys(set["decoList"]).sort()){
+    decoScroll.appendChild(createSkillPair(skill, set["decoList"][skill]))
+  }
+}
+
 // Clears resulting armor sets
 function clearOldResults(){
   // Clear rendered sets
@@ -328,6 +344,15 @@ function clearOldResults(){
     children[0].remove();
   }
   armorList = [];
+}
+
+function clearSetDetails(){
+  // Clear skill details
+  let skills = document.getElementsByClassName("set-skill");
+
+  while(skills.length > 0){
+    skills[0].remove();
+  }
 }
 
 /////////////////////////
@@ -353,6 +378,13 @@ function addSkill() {
 // Called when "Search" is pressed
 // Searches for matching sets based on selected skills
 function search(){
+  // Toggle back to normal menu
+  if(charmsOpen){
+    toggleCharmTab();
+  }
+  if(armorOpen){
+    toggleArmorTab();
+  }
 
   // If this is the first search, we initialize armorsBySkill
   if(armorsBySkill == null){ setABS(); }
@@ -484,6 +516,8 @@ function search(){
                       }
                       // Success check for this skill
                       if(deficit == 0){
+                        // Add the selected skill to the current list and update the flag
+                        newSet["skills"][skill] = selectedSkills[skill]
                         deficitFilled = true;
                         break; 
                       }
@@ -674,17 +708,6 @@ function incrementSlot(elem){
   }
 }
 
-function renderArmorDetails(index){
-  toggleArmorTab();
-  renderSetDetails(index);
-}
-
-function renderSetDetails(index){
-  let set = armorList[parseInt(index)];
-  // Sort skills and decorations
-  let skillScroll = document.getElementById()
-}
-
 /////////////////////////
 // ------HELPERS------ //
 /////////////////////////
@@ -831,3 +854,37 @@ function getMatchingPieces(){
 
   return ret;
 }
+
+function createSkillPair(name, level){
+  let newSkill = document.createElement("div");
+  newSkill.className = "set-skill";
+  newSkill.style.backgroundColor = getAlternatingColor();
+  let newSkillName = document.createElement("p");
+  newSkillName.innerText = name;
+  newSkillName.style.flex = "3";
+  newSkillName.className = "set-skill-base";
+  let newSkillLevel = document.createElement("p");
+  newSkillLevel.innerText = level;
+  newSkillLevel.style.flex = "1";
+  newSkillLevel.className = "set-skill-base";
+  newSkill.appendChild(newSkillName);
+  newSkill.appendChild(newSkillLevel);
+  return newSkill;
+}
+
+// Returns one of two alternating background colors
+// used for rendering rows
+let getAlternatingColor = (function(){
+  let counter = 0;
+  return function(){
+    counter++;
+    if(counter%2==0){
+      return "rgb(255, 199, 248, 0.15)";
+      // newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
+    }
+    else{
+      return "rgb(255, 165, 243, 0.15)";
+      // newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.1)";
+    }
+  }
+}());

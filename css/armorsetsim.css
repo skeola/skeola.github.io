@@ -120,7 +120,7 @@ main {
 
 .search-button {
   flex: 2;
-  margin: 4px;
+  margin: 6px;
   font-size: 20px;
   border: 1px solid black;
   border-radius: 3px;
@@ -138,7 +138,7 @@ main {
   scrollbar-width: thin;
 }
 
-.none-message {
+.flex-center {
   flex: 1;
   display: flex;
   align-items: center;
@@ -161,12 +161,15 @@ main {
 .border-right-light {
   border-right: 1px solid lightgrey;
 }
+.border-right-dark {
+  border-right: 1px solid black;
+}
 
 .detail-button {
   flex: 1;
 }
 
-.selected-skill {
+.skill {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -319,6 +322,7 @@ textarea {
   display: flex;
   flex-direction: row;
   border-right: 2px solid black;
+  overflow-y: hidden;
 }
 
 .armor-list {
@@ -327,23 +331,31 @@ textarea {
   flex-direction: column;
 }
 
-.skills-col {
+.scroll-col {
   flex: 1;
-  border-right: 1px solid black;
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
-}
-
-.decos-col {
-  flex: 1;
-  border-right: 1px solid black;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .set-col {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
+}
+
+.set-skill {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid lightgrey;
+}
+.set-skill-base {
+  border-right: 1px solid lightgrey;
+  padding: 6px 0px;
+  margin: 1px 0px;
 }
 
 /* color1 #0511f2
