@@ -135,6 +135,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-right: 8px; /*space for the scrollbar*/
 }
 
 .results {
@@ -162,8 +163,13 @@ main {
 
 .armor-piece {
   flex: 1;
-  margin: 9px;
+  margin: 9px 0px;
   font-size: 18px;
+  border-right: 1px solid lightgrey;
+}
+
+.detail-button {
+  flex: 1;
 }
 
 .selected-skill {

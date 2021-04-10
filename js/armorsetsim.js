@@ -8,7 +8,11 @@ let armorPieces = {
   "waist": {},
   "legs": {}
 };
-
+let emptyCharm = {
+  "skills": [],
+  "slots": [],
+  "defense": 0
+}
 let counter = 0;
 let searchCap = 100;
 
@@ -19,12 +23,7 @@ let inclSlotArmors = false, useDeco = false, charmsOpen = false, armorOpen = fal
 initArmorSkills();
 initArmorPieces();
 initDecorations();
-// Create an empty decoration
-let tempCharm = {
-  "skills": [],
-  "slots": [],
-  "defense": 0
-}
+
 renderCharms();
 
 ///////////////////////////////
@@ -199,6 +198,7 @@ function renderSelectedSkills() {
   }
 }
 
+// Renders all armor sets
 function renderArmorSets(){
   // Render message if no results
   let msg = document.getElementById("no-results");
@@ -211,12 +211,15 @@ function renderArmorSets(){
   for(let set of armorList){
     renderArmorSet(set["pieces"], set["totalSlots"], set["emptySlots"], set["charmIndex"])
   }
+  // Change to render 20 at a time later
 }
 
 // Renders a set of armors and decoration slots
 // Needs to be passed a set of armor names and decoration info
-function renderArmorSet(armors, slotsTotal, slotsAvailable, charmIndex){
+function renderArmorSet(armors, slotsTotal, slotsAvailable, index){
+  // Create div
   let div = document.getElementById("results");
+  // Create basic information to display
   let newArmorSet = document.createElement("div");
   newArmorSet.className = "armor-set";
   let newHead = document.createElement("p");
@@ -224,14 +227,12 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable, charmIndex){
   let newArms = document.createElement("p");
   let newWaist = document.createElement("p");
   let newLegs = document.createElement("p");
-  let newCharm = document.createElement("p");
   let newDeco = document.createElement("p");
   newHead.innerText = armors[0];
   newChest.innerText = armors[1];
   newArms.innerText = armors[2];
   newWaist.innerText = armors[3];
   newLegs.innerText = armors[4];
-  newCharm.innerText = charmIndex;
   newDeco.innerText = decosAvailable(slotsTotal, slotsAvailable);
   newHead.className = "armor-piece";
   newChest.className = "armor-piece";
@@ -239,20 +240,31 @@ function renderArmorSet(armors, slotsTotal, slotsAvailable, charmIndex){
   newWaist.className = "armor-piece";
   newLegs.className = "armor-piece";
   newDeco.className = "armor-piece";
-  newCharm.className = "armor-piece";
   newArmorSet.appendChild(newHead);
   newArmorSet.appendChild(newChest);
   newArmorSet.appendChild(newArms);
   newArmorSet.appendChild(newWaist);
   newArmorSet.appendChild(newLegs);
   newArmorSet.appendChild(newDeco);
-  newArmorSet.appendChild(newCharm);
-  // Alternate background colors
+
+  // Create details button
+  let buttonWrap = document.createElement("div");
+  buttonWrap.className = "armor-piece"
+  let detailButton = document.createElement("button");
+  detailButton.innerText = "Details";
+  detailButton.onclick = function() { renderArmorDetails(index) }
+  // detailButton.className = "armor-piece";
+  buttonWrap.appendChild(detailButton);
+  newArmorSet.appendChild(buttonWrap);
+
+  // Set alternating background color
   if(counter%2==0){
-    newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
+    newArmorSet.style.backgroundColor = "rgb(255, 199, 248, 0.15)";
+    // newArmorSet.style.backgroundColor = "rgba(5, 17, 242, 0.1)";
   }
   else{
-    newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.1)";
+    newArmorSet.style.backgroundColor = "rgb(255, 165, 243, 0.15)";
+    // newArmorSet.style.backgroundColor = "rgba(191, 144, 4, 0.1)";
   }
   counter++;
   div.appendChild(newArmorSet);
@@ -352,7 +364,7 @@ function search(){
   clearOldResults();
 
   // Add an empty charm to the list
-  charmList.push(tempCharm);
+  charmList.push(emptyCharm);
 
   // Get the weapon slots as our baseline
   let baseDecos = getWeaponDecos();
