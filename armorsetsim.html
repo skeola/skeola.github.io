@@ -12,7 +12,7 @@
 	<body>
 		<main>
       <div class="flex-container">
-        <div class="header-section">
+        <div class="flex-row">
           <div class="option-section">
             <p class="header-text">Options</p>
             <div class="options">
@@ -38,9 +38,9 @@
               <div class="options-col" style="align-items: center;">
                 <button class="option" type="button" id="toggleCharm" onclick="toggleCharmTab()">Toggle Charms</button>
                 <button class="option" type="button" id="toggleArmor" onclick="toggleArmorTab()">Toggle Details</button> <!--temp button-->
-                <div class="weapon-slots option">
+                <div class="flex-col">
                   <p style="margin: 2px;">Weapon Slots</p>
-                  <div class="weapon-slots-buttons">
+                  <div class="flex-row">
                     <button type="button" name="weaponSlots" id="weaponSlots" onclick="incrementSlot(this)">0</button>
                     <button type="button" name="weaponSlots" id="weaponSlots" onclick="incrementSlot(this)">0</button>
                     <button type="button" name="weaponSlots" id="weaponSlots" onclick="incrementSlot(this)">0</button>
@@ -90,14 +90,14 @@
             <div class="subheader">
               <p class="header-text">Charms</p>
             </div>
-            <div class="charms-container" id="charms-container">
+            <div class="flex-row-hidden" id="charms-container">
               <div class="charms">
-                <div class="charms-edit">
-                  <div class="charms-add">
+                <div class="flex-row">
+                  <div class="flex-col border-right-dark">
                     <div class="subheader">
                       <p class="subheader-text">Add New Charm</p>
                     </div>
-                    <div class="charm-config">
+                    <div class="flex-row">
                       <div class="charm-config-col">
                         <label for="add-skill1" id="add-skill1-label">Skill 1
                         </label>
@@ -119,11 +119,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="charms-edit-existing">
+                  <div class="flex-col">
                     <div class="subheader">
                       <p class="subheader-text">Edit Charm</p>
                     </div>                    
-                    <div class="charm-config">
+                    <div class="flex-row">
                       <div class="charm-config-col">
                         <label for="edit-skill1" id="edit-skill1-label">Skill 1
                         </label>
@@ -147,13 +147,15 @@
                   </div>
                 </div>
                 <div class="charms-imported">
-                  <p class="subheader-text results-header">Current Charm List</p>
+                  <div class="subheader">
+                    <p class="subheader-text">Current Charm List</p>
+                  </div>
                   <div class="charms-list" id="charms-list">
 
                   </div>
                 </div>
               </div>
-              <div class="charms-io">
+              <div class="flex-col">
                 <div class="charms-port">
                   <div class="subheader">
                     <p class="subheader-text">Import Charms</p>
@@ -176,10 +178,10 @@
               <p class="header-text" style="flex: 3; border-right: 2px solid black">Set Details</p>
               <p class="header-text" style="flex: 1;">Set List</p>
             </div>
-            <div class="armor-container" id="armor-container">
+            <div class="flex-row-hidden" id="armor-container">
               <div class="armor-details">
-                <div class="set-col border-right-dark">
-                  <div class="subheader" style="padding-right: 8px;">
+                <div class="flex-col-hidden border-right-dark">
+                  <div class="subheader">
                     <p class="subheader-text border-right-light" style="flex: 3;">Skills</p>
                     <p class="subheader-text">Level</p>
                   </div>
@@ -187,8 +189,8 @@
 
                   </div>
                 </div>
-                <div class="set-col border-right-dark">
-                  <div class="subheader" style="padding-right: 8px;">
+                <div class="flex-col-hidden border-right-dark">
+                  <div class="subheader">
                     <p class="subheader-text border-right-light" style="flex: 3;">Decoration</p>
                     <p class="subheader-text">Level</p>
                   </div>
@@ -196,12 +198,22 @@
 
                   </div>
                 </div>
-                <div class="set-col">
-                  <div class="set-col-armor" style="flex: 2;">
-                    <p class="subheader-text">Armor Info</p>
+                <div class="flex-col-hidden">
+                  <div class="flex-col-hidden" style="flex: 2;">
+                    <div class="subheader">
+                      <p class="subheader-text">Armor Info</p>
+                    </div>
+                    <div class="flex-col" id="armor-col">
+
+                    </div>
                   </div>
-                  <div class="set-col-charm" style="flex: 1; border-top: 1px solid black;">
-                    <p class="subheader-text">Charm Info</p>
+                  <div class="flex-col-hidden" style="border-top: 1px solid black">
+                    <div class="subheader">
+                      <p class="subheader-text">Charm Info</p>
+                    </div>
+                    <div class="flex-col" id="charm-col">
+
+                    </div>
                   </div>
                 </div>
               </div>

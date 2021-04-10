@@ -300,7 +300,7 @@ function renderCharms(){
 
     // Slots
     let decos = [0,0,0];
-    for(let lev in charmList[charm]["slots"]){
+    for(let lev of charmList[charm]["slots"]){
       decos[lev-1] += 1;
     }
     for(let i=0; i<3; i++){
@@ -324,7 +324,9 @@ function renderArmorDetails(index){
 }
 
 function renderSetDetails(index){
+  // Get set data
   let set = armorList[parseInt(index)];
+
   // Sort skills and decorations
   let skillScroll = document.getElementById("skills-col");
   for(let skill of Object.keys(set["skills"]).sort()){
@@ -334,6 +336,62 @@ function renderSetDetails(index){
   for(let skill of Object.keys(set["decoList"]).sort()){
     decoScroll.appendChild(createSkillPair(skill, set["decoList"][skill]))
   }
+  
+  // Print out armor piece names
+  let armorBox = document.getElementById("armor-col");
+  armorBox.appendChild(createArmorPair(set["pieces"][0], "Head"));
+  armorBox.appendChild(createArmorPair(set["pieces"][1], "Chest"));
+  armorBox.appendChild(createArmorPair(set["pieces"][2], "Arms"));
+  armorBox.appendChild(createArmorPair(set["pieces"][3], "Waist"));
+  armorBox.appendChild(createArmorPair(set["pieces"][4], "Legs"));
+
+  // Print out charm info
+  let charmBox = document.getElementById("charm-col");
+  let currCharmSkills = charmList[set["charmIndex"]]["skills"];
+  for(let skill of currCharmSkills){
+    let newDiv = document.createElement("div");
+    newDiv.className = "set-armor";
+
+    let newSkillName = document.createElement("p");
+    newSkillName.innerText = skill["name"];
+    newSkillName.className = "set-armor-base border-right-light";
+    newSkillName.style.flex = "3";
+
+    let newSkillLevel = document.createElement("p");
+    newSkillLevel.innerText = skill["level"];
+    newSkillLevel.className = "set-armor-base";
+    newSkillLevel.style.flex = "1";
+
+    newDiv.appendChild(newSkillName);
+    newDiv.appendChild(newSkillLevel);
+    charmBox.append(newDiv);  
+  }
+  // Add slot info
+  let currCharmSlots = charmList[set["charmIndex"]]["slots"];
+  let newDiv = document.createElement("div");
+  newDiv.className = "set-armor";
+  let newSlotName = document.createElement("p");
+  newSlotName.innerText = "Slots";
+  newSlotName.className = "set-armor-base border-right-light";
+  newSlotName.style.flex = "3";
+  newDiv.appendChild(newSlotName)
+
+  for(let i=0; i<3; i++){
+    if(i<currCharmSlots.length){
+      let newSlotLevel = document.createElement("p");
+      newSlotLevel.innerText = currCharmSlots[i];
+      newSlotLevel.className = "set-armor-base";
+      newSlotLevel.style.flex = "1";
+      newDiv.appendChild(newSlotLevel)
+    } else{
+      let newSlotLevel = document.createElement("p");
+      newSlotLevel.innerText = "---";
+      newSlotLevel.className = "set-armor-base";
+      newSlotLevel.style.flex = "1";
+      newDiv.appendChild(newSlotLevel)
+    }
+  }
+  charmBox.append(newDiv);
 }
 
 // Clears resulting armor sets
@@ -546,7 +604,7 @@ function search(){
                 if(charm == charmList.length-1) {
                   newSet["charmIndex"] = "---";
                 } else{
-                  newSet["charmIndex"] = parseInt(charm)+1;
+                  newSet["charmIndex"] = parseInt(charm);
                 }
                 newSet["pieces"] = [head, chest, arms, waist, legs];
                 newSet["emptySlots"] = decoCopy;
@@ -870,6 +928,22 @@ function createSkillPair(name, level){
   newSkill.appendChild(newSkillName);
   newSkill.appendChild(newSkillLevel);
   return newSkill;
+}
+
+function createArmorPair(name, piece){
+  let newPiece = document.createElement("div");
+  newPiece.className = "set-armor";
+  let newPieceName = document.createElement("p");
+  newPieceName.innerText = piece;
+  newPieceName.style.flex = "1";
+  newPieceName.className = "set-armor-base border-right-light";
+  let newPieceLevel = document.createElement("p");
+  newPieceLevel.innerText = name;
+  newPieceLevel.style.flex = "2";
+  newPieceLevel.className = "set-armor-base";
+  newPiece.appendChild(newPieceName);
+  newPiece.appendChild(newPieceLevel);
+  return newPiece;
 }
 
 // Returns one of two alternating background colors

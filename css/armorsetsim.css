@@ -17,10 +17,30 @@ main {
   overflow-y: hidden;
 }
 
-.header-section {
+.flex-row {
   flex: 1;
   display: flex;
   flex-direction: row;
+}
+
+.flex-row-hidden {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+.flex-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-hidden {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 
 .option-section {
@@ -226,36 +246,11 @@ main {
   overflow-y: hidden;
 }
 
-.charms-io {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
 .charms-port {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-.charms-edit {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-}
-
-.charms-add {
-  flex: 1;
-  border-right: 1px solid black;
-  display: flex;
-  flex-direction: column;
-}
-
-.charms-edit-existing {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .charms-imported {
@@ -266,15 +261,8 @@ main {
   border-top: 1px solid black;
 }
 
-.charm-config {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-}
-
 .charm-config-col {
   flex: 1;
-  /* align-content: space-around; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -303,20 +291,6 @@ textarea {
   margin: 30px;
 }
 
-.weapon-slots {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.armor-container {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  overflow-y: hidden;
-}
-
 .armor-details {
   flex: 3;
   display: flex;
@@ -329,21 +303,13 @@ textarea {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .scroll-col {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   overflow-y: scroll;
-  scrollbar-width: thin;
-}
-
-.set-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
+  scrollbar-width: none;
 }
 
 .set-skill {
@@ -354,8 +320,24 @@ textarea {
 }
 .set-skill-base {
   border-right: 1px solid lightgrey;
-  padding: 6px 0px;
-  margin: 1px 0px;
+  padding: 10px 0px;
+  margin: 0px 0px;
+}
+
+.set-armor {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+}
+.set-armor-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0px;
+  padding: auto;
 }
 
 /* color1 #0511f2
