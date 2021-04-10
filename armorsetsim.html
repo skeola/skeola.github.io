@@ -36,8 +36,9 @@
                 </div>
               </div>
               <div class="options-col" style="align-items: center;">
-                <button type="button" id="toggleCharm" onclick="toggleCharmTab()">Toggle Charms</button>
-                <div class="weapon-slots">
+                <button class="option" type="button" id="toggleCharm" onclick="toggleCharmTab()">Toggle Charms</button>
+                <button class="option" type="button" id="toggleArmor" onclick="toggleArmorTab()">Toggle Details</button> <!--temp button-->
+                <div class="weapon-slots option">
                   <p style="margin: 2px;">Weapon Slots</p>
                   <div class="weapon-slots-buttons">
                     <button type="button" name="weaponSlots" id="weaponSlots" onclick="incrementSlot(this)">0</button>
@@ -57,7 +58,7 @@
         <div class="simulator-section">
           <div class="search-section">
             <div class="search-header">
-              <p class="header-text">Skills</p>
+              <p class="header-text">Search Skills</p>
             </div>
             <div class="search-bar">
               <select name="skills" id="skill-select">
@@ -71,16 +72,18 @@
           </div>
           <div class="results-section" id="results-section">
             <div class="results-header">
-              <p class="header-text" style="flex: 1;">Head</p>
-              <p class="header-text" style="flex: 1;">Chest</p>
-              <p class="header-text" style="flex: 1;">Arms</p>
-              <p class="header-text" style="flex: 1;">Waist</p>
-              <p class="header-text" style="flex: 1;">Legs</p>
-              <p class="header-text" style="flex: 1;">Deco Available</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Head</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Chest</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Arms</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Waist</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Legs</p>
+              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Deco Available</p>
               <p class="header-text" style="flex: 1;">Charm Index</p>
             </div>
             <div class="results" id="results">
-
+              <!-- <div class="none-message" id="no-results">
+                <p class="header-text">No results found...</p>
+              </div> -->
             </div>
           </div>
           <div class="charms-section" id="charms-section">
@@ -157,6 +160,33 @@
                   <textarea id="export" name="export" rows=15 cols= 40></textarea>
                   <button type="button" onclick="exportCharms()">Export</button>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="armor-section" id="armor-section">
+            <div class="armor-header">
+              <p class="header-text" style="flex: 3; border-right: 2px solid black">Set Details</p>
+              <p class="header-text" style="flex: 1;">Set List</p>
+            </div>
+            <div class="armor-container" id="armor-container">
+              <div class="armor-details">
+                <div class="skills-col">
+                  <p class="subheader-text">Skills</p>
+                </div>
+                <div class="decos-col">
+                  <p class="subheader-text">Decorations</p>
+                </div>
+                <div class="set-col">
+                  <div class="set-col-armor" style="flex: 3;">
+                    <p class="subheader-text">Armor Info</p>
+                  </div>
+                  <div class="set-col-charm" style="flex: 1; border-top: 1px solid black;">
+                    <p class="subheader-text">Charm Info</p>
+                  </div>
+                </div>
+              </div>
+              <div class="armor-list">
+
               </div>
             </div>
           </div>

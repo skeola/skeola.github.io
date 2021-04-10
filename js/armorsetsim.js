@@ -1,17 +1,19 @@
 // Globals
-let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {}, charmList = [];
+let selectedSkills = {}, skillList = {}, resultsList = {}, decoList = {}, charmList = [], armorList = [];
 let armorsBySkill = null;
-let headArmor = {}, // Eventually condense this into a single object?
-chestArmor = {},
-armsArmor = {},
-waistArmor = {},
-legsArmor = {};
+let armorPieces = {
+  "head": {},
+  "chest": {},
+  "arms": {},
+  "waist": {},
+  "legs": {}
+};
 
 let counter = 0;
 let searchCap = 100;
 
 // Flags
-let inclSlotArmors = false, useDeco = false, charmsOpen = false;
+let inclSlotArmors = false, useDeco = false, charmsOpen = false, armorOpen = false;
 
 // Init
 initArmorSkills();
@@ -40,19 +42,19 @@ async function initArmorSkills(){
 async function initArmorPieces(){
   fetch('https://skeola.github.io/js/head.json')
   .then(response => response.json())
-  .then(data => headArmor = data);
+  .then(data => armorPieces["head"] = data);
   fetch('https://skeola.github.io/js/chest.json')
   .then(response => response.json())
-  .then(data => chestArmor = data);
+  .then(data => armorPieces["chest"] = data);
   fetch('https://skeola.github.io/js/arms.json')
   .then(response => response.json())
-  .then(data => armsArmor = data);
+  .then(data => armorPieces["arms"] = data);
   fetch('https://skeola.github.io/js/waist.json')
   .then(response => response.json())
-  .then(data => waistArmor = data);
+  .then(data => armorPieces["waist"] = data);
   fetch('https://skeola.github.io/js/legs.json')
   .then(response => response.json())
-  .then(data => legsArmor = data);
+  .then(data => armorPieces["legs"] = data);
 }
 
 // Initializes the skillList and skill list dropdowns
@@ -200,6 +202,13 @@ function renderSelectedSkills() {
 // Renders a set of armors and decoration slots
 // Needs to be passed a set of armor names and decoration info
 function renderArmorSet(armors, slotsTotal, slotsAvailable){
+  // let msg = document.getElementById("no-results");
+  // console.log(msg)
+  // if(armorList.length == 0){
+  //   msg.style.display = "inline";
+  // } else{
+  //   msg.style.display = "none";
+  // }
   let div = document.getElementById("results");
   let newArmorSet = document.createElement("div");
   newArmorSet.className = "armor-set";
@@ -334,43 +343,12 @@ function search(){
   clearResults();
 
   // Init sets for matching armor piece names
-  let matchingPieceList = {
-    "head": new Set(),
-    "chest": new Set(),
-    "arms": new Set(),
-    "waist": new Set(),
-    "legs": new Set()
-  }
-  // Init array for full sets that match criteria
-  let matchingSetList = [];
-
-  // Add each required skill's pieces to the set by name
-  // For each armor type (head, chest, ...)
-  for(let key of Object.keys(matchingPieceList)){
-    // Add placeholder item (imitates an empty/unneeded piece)
-    matchingPieceList[key].add("---");
-    // Include slot-only armors if checked
-    if(inclSlotArmors){
-      matchingPieceList["chest"].add("Vaik");
-      matchingPieceList["arms"].add("Jyura");
-      matchingPieceList["waist"].add("Chrome Metal");
-      matchingPieceList["legs"].add("Arzuros");
-    }
-
-    // For each armor skill in this armor piece
-    for(let skill of Object.keys(selectedSkills)){
-      // Check if the skill level has been set to 0
-      if(selectedSkills[skill] != 0){
-        // For each entry in the list of armor names
-        for(let name of armorsBySkill[key][skill]){
-          matchingPieceList[key].add(name)
-        }
-      }
-    }
-  }
+  let matchingPieceList = getMatchingPieces();
 
   // Add an empty charm to the list
   charmList.push(tempCharm);
+
+  // Get the weapon slots as our baseline
   let baseDecos = getWeaponDecos();
 
   // Brute force search every combination lol hopefully I find a better way later
@@ -382,93 +360,121 @@ function search(){
           for(let legs of matchingPieceList["legs"].keys()){
             for(let charm in charmList){
               // Calculate the total skills this set will give
-              let currentSkills = {};
-              decoCount = [...baseDecos];
+              let newSet = {
+                //"pieces": [],
+                "skills": {},
+                "totalSlots": [...baseDecos],
+                //"emptySlots": [],
+                "decoList": {},
+                //"charmIndex": 0
+              }
+              // newSet["totalSlots"] = [...baseDecos];
 
-              for(let skill of headArmor[head]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+              for(let skill of armorPieces["head"][head]["skills"]){
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
-              for(let skill of chestArmor[chest]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+              for(let skill of armorPieces["chest"][chest]["skills"]){
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
-              for(let skill of armsArmor[arms]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+              for(let skill of armorPieces["arms"][arms]["skills"]){
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
-              for(let skill of waistArmor[waist]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+              for(let skill of armorPieces["waist"][waist]["skills"]){
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
-              for(let skill of legsArmor[legs]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+              for(let skill of armorPieces["legs"][legs]["skills"]){
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
               for(let skill of charmList[charm]["skills"]){
-                if(skill["name"] in currentSkills){
-                  currentSkills[skill["name"]] += skill["level"];
+                if(skill["name"] in newSet["skills"]){
+                  newSet["skills"][skill["name"]] += skill["level"];
                 }
                 else{
-                  currentSkills[skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = skill["level"];
                 }
               }
 
               // Calculate decoration slots
-              for(let val of headArmor[head]["slots"]){ decoCount[val-1] += 1; }
-              for(let val of chestArmor[chest]["slots"]){ decoCount[val-1] += 1; }
-              for(let val of armsArmor[arms]["slots"]){ decoCount[val-1] += 1; }
-              for(let val of waistArmor[waist]["slots"]){ decoCount[val-1] += 1; }
-              for(let val of legsArmor[legs]["slots"]){ decoCount[val-1] += 1; }
-              for(let val of charmList[charm]["slots"]){ decoCount[val-1] += 1; }
+              for(let val of armorPieces["head"][head]["slots"]){ newSet["totalSlots"][val-1] += 1; }
+              for(let val of armorPieces["chest"][chest]["slots"]){ newSet["totalSlots"][val-1] += 1; }
+              for(let val of armorPieces["arms"][arms]["slots"]){ newSet["totalSlots"][val-1] += 1; }
+              for(let val of armorPieces["waist"][waist]["slots"]){ newSet["totalSlots"][val-1] += 1; }
+              for(let val of armorPieces["legs"][legs]["slots"]){ newSet["totalSlots"][val-1] += 1; }
+              for(let val of charmList[charm]["slots"]){ newSet["totalSlots"][val-1] += 1; }
 
               // Compare to required criteria
-              let decoCopy = [...decoCount];
+              let decoCopy = [...newSet["totalSlots"]];
               let success = true;
               for(let skill of Object.keys(selectedSkills)){
                 // If skill was set to 0 then it is no longer needed
                 if(selectedSkills[skill] == 0){ continue; }
 
                 // Runs when the current skills are not satisfactory
-                if(!(skill in currentSkills) || currentSkills[skill] < selectedSkills[skill]){
+                if(!(skill in newSet["skills"]) || newSet["skills"][skill] < selectedSkills[skill]){
                   // Runs when decorations can fill the deficit
                   if(useDeco && skill in decoList){
-                    let deficit = selectedSkills[skill] - currentSkills[skill];
+                    // If the skill isn't in the set yet, add it
+                    newSet["skills"][skill] = 0;
+                    let deficit = selectedSkills[skill] - newSet["skills"][skill];
                     let deficitFilled = false;
 
-                    // Check if there are open slots available starting with the 'cheapest'
-                    for(let cost=decoList[skill]; cost<=3; cost++){
-                      // Slot can be filled
-                      if(deficit <= decoCopy[cost-1]){
-                        decoCopy[cost-1] -= deficit;
-                        deficitFilled = true;
+                    // Try to insert decorations into a slot one at a time
+                    while(deficit>0){
+                      let slotWasFilled = false;
+                      // Check if there are open slots available starting with the 'cheapest'
+                      for(let cost=decoList[skill]; cost<=3; cost++){
+                        // Slot can be filled
+                        if(decoCopy[cost-1] > 0){
+                          // Decrement from the available slots and deficit
+                          decoCopy[cost-1] -= 1;
+                          deficit -= 1;
+                          // Increment our decoration counter
+                          if(skill in newSet["decoList"]){ newSet["decoList"][skill] += 1; }
+                          else{ newSet["decoList"][skill] = 1; }
+                          slotWasFilled = true;
+                          break;
+                        }
+                      }
+                      // If no slots are available and deficit still exists, this set fails
+                      if(!slotWasFilled){
                         break;
                       }
+                      // Success check for this skill
+                      if(deficit == 0){
+                        deficitFilled = true;
+                        break; 
+                      }
                     }
-                    // Success check for this skill
+
+                    // Check for filled deficit
                     if(!deficitFilled){
                       success = false;
-                      break; 
+                      break;
                     }
                   } 
                   // Runs when decorations cannot be used
@@ -490,7 +496,7 @@ function search(){
                 } else{
                   charmFormat = parseInt(charm)+1;
                 }
-                renderArmorSet([head, chest, arms, waist, legs, charmFormat], decoCount, decoCopy);
+                renderArmorSet([head, chest, arms, waist, legs, charmFormat], newSet["totalSlots"], decoCopy);
               }
             }
           }
@@ -579,18 +585,44 @@ function toggleCharmTab(){
   // Flip flag
   charmsOpen = !charmsOpen;    
 
-  let toggleButton = document.getElementById("toggleCharm");
   let resultsSec = document.getElementById("results-section");
   let charmSec = document.getElementById("charms-section");
+  let armorSec = document.getElementById("armor-section");
   // Render accordingly
   if(charmsOpen){
+    armorOpen = false;
     // toggleButton.innerText = "Hide";
     resultsSec.style.display = "none";
     charmSec.style.display = "flex";
+    armorSec.style.display = "none";
   } else{
     // toggleButton.innerText = "Show";
     resultsSec.style.display = "flex";
     charmSec.style.display = "none";
+    armorSec.style.display = "none";
+  }
+}
+
+// Toggles visibility of charm info
+function toggleArmorTab(){
+  // Flip flag
+  armorOpen = !armorOpen;    
+
+  let resultsSec = document.getElementById("results-section");
+  let charmSec = document.getElementById("charms-section");
+  let armorSec = document.getElementById("armor-section");
+  // Render accordingly
+  if(armorOpen){
+    charmsOpen = false;
+    // toggleButton.innerText = "Hide";
+    resultsSec.style.display = "none";
+    charmSec.style.display = "none";
+    armorSec.style.display = "flex";
+  } else{
+    // toggleButton.innerText = "Show";
+    resultsSec.style.display = "flex";
+    charmSec.style.display = "none";
+    armorSec.style.display = "none";
   }
 }
 
@@ -669,28 +701,28 @@ function setABS(){
   armorsBySkill["legs"] = JSON.parse(JSON.stringify(newObj));
 
   // Iterate through all armor pieces, adding them to their appropriate list
-  for(key of Object.keys(headArmor)){
-    for(skill of headArmor[key]["skills"]){
+  for(key of Object.keys(armorPieces["head"])){
+    for(skill of armorPieces["head"][key]["skills"]){
       armorsBySkill["head"][skill["name"]].push(key);
     }
   }
-  for(key of Object.keys(chestArmor)){
-    for(skill of chestArmor[key]["skills"]){
+  for(key of Object.keys(armorPieces["chest"])){
+    for(skill of armorPieces["chest"][key]["skills"]){
       armorsBySkill["chest"][skill["name"]].push(key);
     }
   }
-  for(key of Object.keys(armsArmor)){
-    for(skill of armsArmor[key]["skills"]){
+  for(key of Object.keys(armorPieces["arms"])){
+    for(skill of armorPieces["arms"][key]["skills"]){
       armorsBySkill["arms"][skill["name"]].push(key);
     }
   }
-  for(key of Object.keys(waistArmor)){
-    for(skill of waistArmor[key]["skills"]){
+  for(key of Object.keys(armorPieces["waist"])){
+    for(skill of armorPieces["waist"][key]["skills"]){
       armorsBySkill["waist"][skill["name"]].push(key);
     }
   }
-  for(key of Object.keys(legsArmor)){
-    for(skill of legsArmor[key]["skills"]){
+  for(key of Object.keys(armorPieces["legs"])){
+    for(skill of armorPieces["legs"][key]["skills"]){
       armorsBySkill["legs"][skill["name"]].push(key);
     }
   }
@@ -706,6 +738,7 @@ function decosAvailable(slotsTotal, slotsAvailable){
   return str;
 }
 
+// Gets weapon decorations from the options buttons
 function getWeaponDecos(){
   let btns = document.getElementsByName("weaponSlots");
   let ret = [0,0,0];
@@ -714,5 +747,44 @@ function getWeaponDecos(){
       ret[parseInt(btn.innerText)-1] += 1;
     }
   }
+  return ret;
+}
+
+// Uses armorBySkill to get all pieces that match selectedSkills
+function getMatchingPieces(){
+  let ret = {
+    "head": new Set(),
+    "chest": new Set(),
+    "arms": new Set(),
+    "waist": new Set(),
+    "legs": new Set()
+  }
+  
+  // Add each required skill's pieces to the set by name
+  // For each armor type (head, chest, ...)
+  for(let key of Object.keys(ret)){
+    // Add placeholder item (imitates an empty/unneeded piece)
+    ret[key].add("---");
+    // Include slot-only armors if checked
+    if(inclSlotArmors){
+      ret["head"].add("Skull")
+      ret["chest"].add("Vaik");
+      ret["arms"].add("Jyura");
+      ret["waist"].add("Chrome Metal");
+      ret["legs"].add("Arzuros");
+    }
+  
+    // For each armor skill in this armor piece
+    for(let skill of Object.keys(selectedSkills)){
+      // Check if the skill level has been set to 0
+      if(selectedSkills[skill] != 0){
+        // For each entry in the list of armor names
+        for(let name of armorsBySkill[key][skill]){
+          ret[key].add(name)
+        }
+      }
+    }
+  }
+
   return ret;
 }
