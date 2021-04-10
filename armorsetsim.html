@@ -57,7 +57,7 @@
         </div>
         <div class="simulator-section">
           <div class="search-section">
-            <div class="search-header">
+            <div class="subheader">
               <p class="header-text">Search Skills</p>
             </div>
             <div class="search-bar">
@@ -71,30 +71,32 @@
             <button class="search-button" type="button" onclick="search()">Search</button>
           </div>
           <div class="results-section" id="results-section">
-            <div class="results-header">
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Head</p>
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Chest</p>
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Arms</p>
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Waist</p>
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Legs</p>
-              <p class="header-text" style="flex: 1; border-right: 1px solid lightgrey">Deco Available</p>
+            <div class="subheader" style="margin-right: 8px;">
+              <p class="header-text border-right-light">Head</p>
+              <p class="header-text border-right-light">Chest</p>
+              <p class="header-text border-right-light">Arms</p>
+              <p class="header-text border-right-light">Waist</p>
+              <p class="header-text border-right-light">Legs</p>
+              <p class="header-text border-right-light">Deco Available</p>
               <p class="header-text" style="flex: 1;"> </p>
             </div>
             <div class="results" id="results">
               <div class="none-message" id="no-results">
-                <p class="header-text">No results found...</p>
+                <p class="subheader-text">No results found...</p>
               </div>
             </div>
           </div>
           <div class="charms-section" id="charms-section">
-            <div class="charms-header">
+            <div class="subheader">
               <p class="header-text">Charms</p>
             </div>
             <div class="charms-container" id="charms-container">
               <div class="charms">
                 <div class="charms-edit">
                   <div class="charms-add">
-                    <p class="subheader-text">Add New Charm</p>
+                    <div class="subheader">
+                      <p class="subheader-text">Add New Charm</p>
+                    </div>
                     <div class="charm-config">
                       <div class="charm-config-col">
                         <label for="add-skill1" id="add-skill1-label">Skill 1
@@ -118,7 +120,9 @@
                     </div>
                   </div>
                   <div class="charms-edit-existing">
-                    <p class="subheader-text">Edit Charm</p>
+                    <div class="subheader">
+                      <p class="subheader-text">Edit Charm</p>
+                    </div>                    
                     <div class="charm-config">
                       <div class="charm-config-col">
                         <label for="edit-skill1" id="edit-skill1-label">Skill 1
@@ -151,30 +155,40 @@
               </div>
               <div class="charms-io">
                 <div class="charms-port">
-                  <p class="subheader-text" style="flex: 1;">Import Charms</p>
-                  <textarea id="import" name="import" rows=15 cols= 40 autocomplete="off"></textarea>
-                  <button type="button" onclick="importCharms()">Import</button>
+                  <div class="subheader">
+                    <p class="subheader-text">Import Charms</p>
+                  </div>
+                  <textarea id="import" name="import" autocomplete="off"></textarea>
+                  <button type="button" onclick="importCharms()" style="flex: 1; margin: 10px auto;">Import</button>
                 </div>
-                <div class="charms-port">
-                  <p class="subheader-text" style="flex: 1;">Export Charms</p>
-                  <textarea id="export" name="export" rows=15 cols= 40></textarea>
-                  <button type="button" onclick="exportCharms()">Export</button>
+                <div class="charms-port" style="border-top: 2px solid black">
+                  <div class="subheader">
+                    <p class="subheader-text">Export Charms</p>
+                  </div>
+                  <textarea id="export" name="export"></textarea>
+                  <button type="button" onclick="exportCharms()" style="flex: 1; margin: 10px auto;">Export</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="armor-section" id="armor-section">
-            <div class="armor-header">
+            <div class="subheader">
               <p class="header-text" style="flex: 3; border-right: 2px solid black">Set Details</p>
               <p class="header-text" style="flex: 1;">Set List</p>
             </div>
             <div class="armor-container" id="armor-container">
               <div class="armor-details">
                 <div class="skills-col">
-                  <p class="subheader-text">Skills</p>
+                  <div class="subheader">
+                    <p class="subheader-text border-right-light" style="flex: 3;">Skills</p>
+                    <p class="subheader-text">Level</p>
+                  </div>
                 </div>
                 <div class="decos-col">
-                  <p class="subheader-text">Decorations</p>
+                  <div class="subheader">
+                    <p class="subheader-text border-right-light" style="flex: 3;">Decoration</p>
+                    <p class="subheader-text">Level</p>
+                  </div>  
                 </div>
                 <div class="set-col">
                   <div class="set-col-armor" style="flex: 3;">

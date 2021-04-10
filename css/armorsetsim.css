@@ -89,27 +89,26 @@ main {
   margin: auto;
 }
 
+.subheader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .header-text {
+  flex: 1;
+  padding: 5px 0px;
   font-size: 24px;
   margin: 0px;
-  padding: 6px 0;
+  border-bottom: 2px solid black;
 }
 
 .subheader-text {
-  margin: 4px;
+  flex: 1;
+  padding: 4px 0px;
   font-size: 18px;
-}
-
-.search-header {
-  display: flex;
-  flex-direction: row;
-  border-bottom: 2px solid black;
-  justify-content: center;
-}
-
-.search-header-text {
-  margin: 9px;
-  font-size: 18px;
+  margin: 0px;
+  border-bottom: 1px solid black;
 }
 
 .search-bar {
@@ -131,20 +130,12 @@ main {
   background-color: rgb(187, 187, 187);
 }
 
-.results-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-right: 8px; /*space for the scrollbar*/
-}
-
 .results {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   scrollbar-width: thin;
-  border-top: 2px solid black;
 }
 
 .none-message {
@@ -165,6 +156,9 @@ main {
   flex: 1;
   margin: 9px 0px;
   font-size: 18px;
+}
+
+.border-right-light {
   border-right: 1px solid lightgrey;
 }
 
@@ -193,7 +187,6 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border-top: 2px solid black;
   padding-top: 6px;
 }
 
@@ -213,12 +206,6 @@ main {
 
 .option-dropdown-text {
   text-indent: 4px;
-}
-
-.charms-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 .charms-container {
@@ -244,21 +231,20 @@ main {
 
 .charms-port {
   flex: 1;
-  border-top: 2px solid black;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .charms-edit {
   flex: 1;
-  border-top: 2px solid black;
   display: flex;
   flex-direction: row;
 }
 
 .charms-add {
   flex: 1;
-  border-right: 2px solid black;
+  border-right: 1px solid black;
   display: flex;
   flex-direction: column;
 }
@@ -271,10 +257,10 @@ main {
 
 .charms-imported {
   flex: 3;
-  border-top: 2px solid black;
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+  border-top: 1px solid black;
 }
 
 .charm-config {
@@ -290,7 +276,6 @@ main {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid black;
 }
 
 .charms-list {
@@ -299,7 +284,6 @@ main {
   flex-direction: column;
   overflow-y: scroll;
   scrollbar-width: thin;
-  border-top: 1px solid black;
 }
 
 .charm-display {
@@ -310,10 +294,10 @@ main {
 }
 
 textarea {
-  flex: 6;
+  flex: 5;
   box-sizing: border-box;
   resize: none;
-  margin: 10px;
+  margin: 30px;
 }
 
 .weapon-slots {
@@ -321,12 +305,6 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.armor-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 .armor-container {
@@ -339,14 +317,12 @@ textarea {
 .armor-details {
   flex: 3;
   display: flex;
-  border-top: 2px solid black;
   flex-direction: row;
   border-right: 2px solid black;
 }
 
 .armor-list {
   flex: 1;
-  border-top: 2px solid black;
   display: flex;
   flex-direction: column;
 }
@@ -354,6 +330,9 @@ textarea {
 .skills-col {
   flex: 1;
   border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 
 .decos-col {
@@ -370,3 +349,12 @@ textarea {
 /* color1 #0511f2
    color2 #bf9004
 */
+/* 
+let newSet = {
+  //"pieces": [],
+  "skills": {},
+  "totalSlots": [...baseDecos],
+  //"emptySlots": [],
+  "decoList": {},
+  //"charmIndex": 0
+} */

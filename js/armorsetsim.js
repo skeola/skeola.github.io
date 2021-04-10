@@ -209,7 +209,7 @@ function renderArmorSets(){
   }
 
   for(let set of armorList){
-    renderArmorSet(set["pieces"], set["totalSlots"], set["emptySlots"], set["charmIndex"])
+    renderArmorSet(set["pieces"], set["totalSlots"], set["emptySlots"], armorList.indexOf(set))
   }
   // Change to render 20 at a time later
 }
@@ -672,6 +672,17 @@ function incrementSlot(elem){
   } else if(elem.innerText == "3"){
     elem.innerText = "0";
   }
+}
+
+function renderArmorDetails(index){
+  toggleArmorTab();
+  renderSetDetails(index);
+}
+
+function renderSetDetails(index){
+  let set = armorList[parseInt(index)];
+  // Sort skills and decorations
+  let skillScroll = document.getElementById()
 }
 
 /////////////////////////
