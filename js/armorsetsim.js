@@ -326,6 +326,7 @@ function renderArmorDetails(index){
 function renderSetDetails(index){
   // Get set data
   let set = armorList[parseInt(index)];
+  console.log(set)
 
   // Sort skills and decorations
   let skillScroll = document.getElementById("skills-col");
@@ -528,10 +529,10 @@ function search(){
               }
               for(let skill of charmList[charm]["skills"]){
                 if(skill["name"] in newSet["skills"]){
-                  newSet["skills"][skill["name"]] += skill["level"];
+                  newSet["skills"][skill["name"]] += parseInt(skill["level"]);
                 }
                 else{
-                  newSet["skills"][skill["name"]] = skill["level"];
+                  newSet["skills"][skill["name"]] = parseInt(skill["level"]);
                 }
               }
 
@@ -570,7 +571,9 @@ function search(){
                           decoCopy[cost-1] -= 1;
                           deficit -= 1;
                           // Increment our decoration counter
-                          if(skill in newSet["decoList"]){ newSet["decoList"][skill] += 1; }
+                          if(skill in newSet["decoList"]){ 
+                            newSet["decoList"][skill] += 1; 
+                          }
                           else{ newSet["decoList"][skill] = 1; }
                           slotWasFilled = true;
                           break;
