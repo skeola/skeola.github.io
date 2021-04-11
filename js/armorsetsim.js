@@ -347,51 +347,53 @@ function renderSetDetails(index){
 
   // Print out charm info
   let charmBox = document.getElementById("charm-col");
-  let currCharmSkills = charmList[set["charmIndex"]]["skills"];
-  for(let skill of currCharmSkills){
+  if(set["charmIndex"] != "---"){
+    let currCharmSkills = charmList[set["charmIndex"]]["skills"];
+    for(let skill of currCharmSkills){
+      let newDiv = document.createElement("div");
+      newDiv.className = "set-armor";
+  
+      let newSkillName = document.createElement("p");
+      newSkillName.innerText = skill["name"];
+      newSkillName.className = "set-armor-base border-right-light";
+      newSkillName.style.flex = "3";
+  
+      let newSkillLevel = document.createElement("p");
+      newSkillLevel.innerText = skill["level"];
+      newSkillLevel.className = "set-armor-base";
+      newSkillLevel.style.flex = "1";
+  
+      newDiv.appendChild(newSkillName);
+      newDiv.appendChild(newSkillLevel);
+      charmBox.append(newDiv);  
+    }
+    // Add slot info
+    let currCharmSlots = charmList[set["charmIndex"]]["slots"];
     let newDiv = document.createElement("div");
     newDiv.className = "set-armor";
-
-    let newSkillName = document.createElement("p");
-    newSkillName.innerText = skill["name"];
-    newSkillName.className = "set-armor-base border-right-light";
-    newSkillName.style.flex = "3";
-
-    let newSkillLevel = document.createElement("p");
-    newSkillLevel.innerText = skill["level"];
-    newSkillLevel.className = "set-armor-base";
-    newSkillLevel.style.flex = "1";
-
-    newDiv.appendChild(newSkillName);
-    newDiv.appendChild(newSkillLevel);
-    charmBox.append(newDiv);  
-  }
-  // Add slot info
-  let currCharmSlots = charmList[set["charmIndex"]]["slots"];
-  let newDiv = document.createElement("div");
-  newDiv.className = "set-armor";
-  let newSlotName = document.createElement("p");
-  newSlotName.innerText = "Slots";
-  newSlotName.className = "set-armor-base border-right-light";
-  newSlotName.style.flex = "3";
-  newDiv.appendChild(newSlotName)
-
-  for(let i=0; i<3; i++){
-    if(i<currCharmSlots.length){
-      let newSlotLevel = document.createElement("p");
-      newSlotLevel.innerText = currCharmSlots[i];
-      newSlotLevel.className = "set-armor-base";
-      newSlotLevel.style.flex = "1";
-      newDiv.appendChild(newSlotLevel)
-    } else{
-      let newSlotLevel = document.createElement("p");
-      newSlotLevel.innerText = "---";
-      newSlotLevel.className = "set-armor-base";
-      newSlotLevel.style.flex = "1";
-      newDiv.appendChild(newSlotLevel)
+    let newSlotName = document.createElement("p");
+    newSlotName.innerText = "Slots";
+    newSlotName.className = "set-armor-base border-right-light";
+    newSlotName.style.flex = "3";
+    newDiv.appendChild(newSlotName)
+  
+    for(let i=0; i<3; i++){
+      if(i<currCharmSlots.length){
+        let newSlotLevel = document.createElement("p");
+        newSlotLevel.innerText = currCharmSlots[i];
+        newSlotLevel.className = "set-armor-base";
+        newSlotLevel.style.flex = "1";
+        newDiv.appendChild(newSlotLevel)
+      } else{
+        let newSlotLevel = document.createElement("p");
+        newSlotLevel.innerText = "---";
+        newSlotLevel.className = "set-armor-base";
+        newSlotLevel.style.flex = "1";
+        newDiv.appendChild(newSlotLevel)
+      }
     }
+    charmBox.append(newDiv);
   }
-  charmBox.append(newDiv);
 }
 
 // Clears resulting armor sets
@@ -407,6 +409,12 @@ function clearOldResults(){
 function clearSetDetails(){
   // Clear skill details
   let skills = document.getElementsByClassName("set-skill");
+
+  while(skills.length > 0){
+    skills[0].remove();
+  }
+
+  skills = document.getElementsByClassName("set-armor");
 
   while(skills.length > 0){
     skills[0].remove();
@@ -597,10 +605,6 @@ function search(){
               
               if(success == true){
                 count += 1;
-                if(count>searchCap){
-                  window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
-                  return;
-                }
                 if(charm == charmList.length-1) {
                   newSet["charmIndex"] = "---";
                 } else{
@@ -609,6 +613,15 @@ function search(){
                 newSet["pieces"] = [head, chest, arms, waist, legs];
                 newSet["emptySlots"] = decoCopy;
                 armorList.push(newSet);
+
+                if(count>searchCap){
+                  window.alert("Over "+searchCap+"+ results for this search, please narrow the criteria!");
+                  renderArmorSets();
+
+                  // Remove empty charm from the list
+                  charmList.pop();
+                  return;
+                }
               }
             }
           }
